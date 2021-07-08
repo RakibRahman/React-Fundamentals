@@ -1,0 +1,18 @@
+.article__body {
+  display: grid;
+  grid-template-columns: repeat(3, 300px);
+}
+
+.article__card {
+  border: 1px solid #f14e0d;
+  font-size: 1rem;
+  text-align: center;
+}
+.article__card h1 {
+  letter-spacing: 2px;
+}
+@media screen and (max-width: 900px) {
+  .article__body {
+    grid-template-columns: repeat(2, 300px);
+  }
+}
