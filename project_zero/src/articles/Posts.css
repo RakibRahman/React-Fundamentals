@@ -11,6 +11,13 @@
 .article__card h1 {
   letter-spacing: 2px;
 }
+.hello {
+  font-weight: 900;
+}
+.hello::first-letter {
+  font-size: 2rem;
+  color: #00ff00;
+}
 @media screen and (max-width: 900px) {
   .article__body {
     grid-template-columns: repeat(2, 300px);
