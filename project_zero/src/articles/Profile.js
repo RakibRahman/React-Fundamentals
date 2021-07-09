@@ -1,5 +1,21 @@
 import React from "react";
 
+class Info extends React.Component {
+  render() {
+    let jutsus = this.props.jutsu.map((j) => {
+      return <li>{j}</li>;
+    });
+    return (
+      <div>
+        <h1>{this.props.name}</h1>
+        <h3>{this.props.age}</h3>
+        <p>Quote:{this.props.bio} </p>
+        <h4>Jutsus:</h4>
+        <ul>{jutsus}</ul>
+      </div>
+    );
+  }
+}
 class Profile extends React.Component {
   constructor(props) {
     super(props);
@@ -19,19 +35,38 @@ class Profile extends React.Component {
         },
       ],
     };
+    this.addNinja = this.addNinja.bind(this);
   }
-
+  addNinja(e) {
+    let user = {
+      name: "Kakashi",
+      age: 25,
+      bio: "Copy Ninja",
+      jutsu: ["Kamui", "Genjutsu"],
+    };
+    this.setState({
+      profiles: this.state.profiles.concat([user]),
+    });
+  }
   render() {
+    let infos = this.state.profiles.map((profile) => {
+      return (
+        <div>
+          <Info
+            name={profile.name}
+            age={profile.age}
+            bio={profile.bio}
+            jutsu={profile.jutsu}
+          />
+        </div>
+      );
+    });
+
     return (
       <div>
-        <h1>{this.state.profiles[0].name}</h1>
-        <h3>{this.state.profiles[0].age}</h3>
-        <p>Quote: {this.state.profiles[0].bio}</p>
-        <h4>Jutsus:</h4>
-        <ul>
-          <li>{this.state.profiles[0].jutsu[0]}</li>
-          <li>{this.state.profiles[0].jutsu[1]}</li>
-        </ul>
+        {infos}
+
+        <button onClick={this.addNinja}>Add New Ninja</button>
       </div>
     );
   }
