@@ -5,6 +5,7 @@
 .Error {
   color: red;
 }
-.allOk {
+.allOk,
+.calculate {
   color: springgreen;
 }

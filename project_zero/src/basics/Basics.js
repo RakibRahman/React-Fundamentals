@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./basics.css";
 
 import CreateElement from "./createElement";
+import DemoComponent from "./DemoComponent";
 
 const Basics = (_) => {
   const hello = <p> {((_) => "Hello World!")()} </p>;
@@ -50,6 +51,7 @@ const Basics = (_) => {
       {hello}
       {errorMessage}
       <WelcomeMessage />
+      {DemoComponent()}
     </React.Fragment>
   );
 };
