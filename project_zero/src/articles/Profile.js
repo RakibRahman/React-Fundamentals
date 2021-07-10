@@ -45,7 +45,7 @@ class Profile extends React.Component {
       jutsu: ["Kamui", "Genjutsu"],
     };
     this.setState({
-      profiles: this.state.profiles.concat([user]),
+      profiles: this.state.profiles.concat(user),
     });
   }
   render() {
