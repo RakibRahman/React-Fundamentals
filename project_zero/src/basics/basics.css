@@ -1,0 +1,10 @@
+.paragraph {
+  color: green;
+  font-size: 2rem;
+}
+.Error {
+  color: red;
+}
+.allOk {
+  color: springgreen;
+}

@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import Article from "./articles/Posts";
-import Profile from "./articles/Profile";
+import Article from "./articles/Posts"; // eslint-disable-next-line
+import Profile from "./articles/Profile"; // eslint-disable-next-line
 import Basics from "./basics/Basics";
 // ReactDOM.render(
 //   <React.StrictMode>
