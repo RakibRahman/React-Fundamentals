@@ -1,8 +1,6 @@
-import React from "react";
-
 function DemoComponent() {
   const calculate = (x, y) => x * y;
-  const Paragraph = () => <p>Calculated Value Is: {calculate(10, 1)}</p>;
+  const Paragraph = () => <p>Calculated Value Is: {calculate(10, 1001)}</p>;
 
   const Paragraph2 = (props) => <p>{props.txt}</p>;
 

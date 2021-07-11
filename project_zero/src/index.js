@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+// import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import Article from "./articles/Posts"; // eslint-disable-next-line
-import Profile from "./articles/Profile"; // eslint-disable-next-line
+// import Article from "./articles/Posts";
+// import Profile from "./articles/Profile";
 import Basics from "./basics/Basics";
 // ReactDOM.render(
 //   <React.StrictMode>

@@ -1,12 +1,13 @@
 import React from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import "./basics.css";
 
-import CreateElement from "./createElement";
-import DemoComponent from "./DemoComponent";
-
+// import CreateElement from "./createElement";
+// import DemoComponent from "./DemoComponent";
+// import ChildProps from "./ChildProps";
+import EventHandler from "./EventHandler";
 const Basics = (_) => {
-  const hello = <p> {((_) => "Hello World!")()} </p>;
+  // const hello = <p> {((_) => "Hello World!")()} </p>;
 
   const input = (
     <React.Fragment>
@@ -17,10 +18,10 @@ const Basics = (_) => {
     </React.Fragment>
   );
 
-  const someText = " lorem ipsum dolor sit amet lorem ipsum lorem et";
+  // const someText = " lorem ipsum dolor sit amet lorem ipsum lorem et";
   let count = 0;
   const interval = setInterval(() => {
-    const counter = <p>{count}</p>;
+    // const counter = <p>{count}</p>;
 
     if (count === 500) {
       clearInterval(interval);
@@ -29,29 +30,31 @@ const Basics = (_) => {
     }
     // ReactDOM.render(counter, document.getElementById("root3"));
   }, 300);
-  const paragraph = <p className="paragraph">{someText}</p>;
+  // const paragraph = <p className="paragraph">{someText}</p>;
 
-  const isError = false;
+  // const isError = false;
 
-  const errorMessage = (
-    <p className={isError ? "Error" : "allOk"}>
-      {isError ? "Something went wrong" : "All ok"}
-    </p>
-  );
-  function WelcomeMessage() {
-    return <p>{someText}</p>;
-  }
+  // const errorMessage = (
+  //   <p className={isError ? "Error" : "allOk"}>
+  //     {isError ? "Something went wrong" : "All ok"}
+  //   </p>
+  // );
+  // function WelcomeMessage() {
+  //   return <p>{someText}</p>;
+  // }
   return (
     <React.Fragment>
-      <h1>Hello</h1>
-      {CreateElement()}
-      {input}
+      <h1>Hello World</h1>
+      {/* {CreateElement()} */}
+      {/* {input} */}
       <hr />
-      {paragraph}
-      {hello}
-      {errorMessage}
-      <WelcomeMessage />
-      {DemoComponent()}
+      {/* {paragraph} */}
+      {/* {hello} */}
+      {/* {errorMessage} */}
+      {/* <WelcomeMessage /> */}
+      {/* {DemoComponent()} */}
+      {/* {ChildProps()} */}
+      {EventHandler()}
     </React.Fragment>
   );
 };
