@@ -4,7 +4,19 @@ import Props from "./Props";
 function WelcomeMessage() {
   return <h1 id="tag">Hello World!!</h1>;
 }
-
+function LoginMessage() {
+  return React.createElement(
+    "div",
+    { className: "maindiv" },
+    React.createElement("div", {}, "Child1"),
+    React.createElement(
+      "div",
+      {},
+      "Child2",
+      React.createElement("h3", { className: "tag" }, "child of 2")
+    )
+  );
+}
 const GenerateNames = (_) => {
   const names = ["Rakib", "Sakib", "Pain", "Naurto"];
   const colors = ["red", "green", "blue", "purple", "yellow"];
@@ -38,12 +50,29 @@ const GenerateNames = (_) => {
     </div>
   );
 };
-
+function FirstName() {
+  return <span>Rakib</span>;
+}
+function LastName() {
+  return <span>Rahman</span>;
+}
+function FullName() {
+  return (
+    <div>
+      <FirstName /> <LastName />!
+    </div>
+  );
+}
 ReactDOM.render(
   <Fragment>
+    <FullName />
     <Props />
     <WelcomeMessage />
     <GenerateNames />
+    <LoginMessage />
   </Fragment>,
   document.querySelector("#root")
 );
+if (module.hot) {
+  module.hot.accept();
+}
