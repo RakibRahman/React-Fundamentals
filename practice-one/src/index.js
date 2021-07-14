@@ -5,9 +5,11 @@ import App from "./App";
 import Envelope from "./Envelope/Envelope.js";
 import Card from "./Card/Card.js";
 import ChildProp from "./ChildrenProp/ChildrenProp.js";
-
+import GithubUI from "./GithubUI/GithubUI.js";
+import Demo from "./useState/Demo.js";
 const url =
   "https://cheapandcheerfulcooking.com/wp-content/uploads/2021/01/chinese-fried-noodles-basic-recipe-2.jpg";
+
 const root = document.querySelector("#root");
 const Background = (_) => {
   const generateColor = () =>
@@ -42,6 +44,8 @@ const ErrorBox = ({ children, re }) => {
 };
 ReactDOM.render(
   <Fragment>
+    <Demo />
+    <GithubUI />
     <ChildProp />
     <Background />
     <ErrorBox children="The world is" re=" ending" />

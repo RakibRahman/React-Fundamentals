@@ -1,0 +1,23 @@
+.file__list {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+.file__list tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.file__list tr:hover {
+  background-color: #ddd;
+}
+table,
+th,
+td {
+  border: 3px solid #ccc;
+}
+.file__name {
+  padding: 4px;
+  max-width: 180px;
+}
+.file__list td {
+  border-top: 1px solid #ccc;
+}
