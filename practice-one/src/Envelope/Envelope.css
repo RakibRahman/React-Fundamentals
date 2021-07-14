@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.envelop {
+  width: 800px;
+  height: 300px;
+  border: 2px solid #ccc;
+}
+.sender {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.stamp {
+  width: 100px;
+  height: 120px;
+  border: 2px solid #000000;
+  position: relative;
+}
+.stamp span {
+  position: absolute;
+  top: 50px;
+  font-size: 2rem;
+  color: #ccc;
+  transform: rotate(50deg);
+}
+.receiver {
+  text-align: center;
+}

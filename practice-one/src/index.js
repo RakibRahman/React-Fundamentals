@@ -1,78 +1,57 @@
-import React, { useState, Fragment } from "react";
+import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
-import Props from "./Props";
-function WelcomeMessage() {
-  return <h1 id="tag">Hello World!!</h1>;
-}
-function LoginMessage() {
-  return React.createElement(
-    "div",
-    { className: "maindiv" },
-    React.createElement("div", {}, "Child1"),
-    React.createElement(
-      "div",
-      {},
-      "Child2",
-      React.createElement("h3", { className: "tag" }, "child of 2")
-    )
-  );
-}
-const GenerateNames = (_) => {
-  const names = ["Rakib", "Sakib", "Pain", "Naurto"];
-  const colors = ["red", "green", "blue", "purple", "yellow"];
+import "./index.css";
+import App from "./App";
+import Envelope from "./Envelope/Envelope.js";
+import Card from "./Card/Card.js";
+import ChildProp from "./ChildrenProp/ChildrenProp.js";
 
-  const [name, setName] = useState(names[0]);
-
-  const randomValues = (arr) => {
-    const random = Math.floor(Math.random() * arr.length);
-    return arr[random];
+const url =
+  "https://cheapandcheerfulcooking.com/wp-content/uploads/2021/01/chinese-fried-noodles-basic-recipe-2.jpg";
+const root = document.querySelector("#root");
+const Background = (_) => {
+  const generateColor = () =>
+    "#" +
+    Math.floor(Math.random() * 0xffffff)
+      .toString(16)
+      .padEnd(6, "0");
+  const Div = () => {
+    return <div className="bg"></div>;
   };
 
-  const onClickHandler = (_) => {
-    setName(() => randomValues(names));
-
-    const title = document.querySelector("#tag");
-    const btn = document.querySelector(".btn");
-    title.style.color = `${randomValues(colors)}`;
-    btn.style.backgroundColor = `${randomValues(colors)}`;
+  const getColor = () => {
+    console.log(generateColor());
+    const bg = document.querySelector(".bg");
+    bg.style.background = `${generateColor()}`;
   };
-
-  const Button = (_) => (
-    <button className="btn" onClick={onClickHandler}>
-      Click me
-    </button>
-  );
-
   return (
-    <div>
-      <p>{name}</p>
-      <Button />
-    </div>
+    <Fragment>
+      <Div />
+      <button onClick={getColor}>Generate Color</button>
+    </Fragment>
   );
 };
-function FirstName() {
-  return <span>Rakib</span>;
-}
-function LastName() {
-  return <span>Rahman</span>;
-}
-function FullName() {
+const ErrorBox = ({ children, re }) => {
   return (
-    <div>
-      <FirstName /> <LastName />!
-    </div>
+    <button>
+      <span>🔴</span>
+      {children}
+      {re}
+    </button>
   );
-}
+};
 ReactDOM.render(
   <Fragment>
-    <FullName />
-    <Props />
-    <WelcomeMessage />
-    <GenerateNames />
-    <LoginMessage />
+    <ChildProp />
+    <Background />
+    <ErrorBox children="The world is" re=" ending" />
+    <App />
+    <Envelope />
+    <Card
+      image={url}
+      title="Hakka Noodles"
+      text="Hakka Noodles is the best noodles"
+    />
   </Fragment>,
-  document.querySelector("#root")
+  root
 );
-if (module.hot) {
-  module.hot.accept();
-}

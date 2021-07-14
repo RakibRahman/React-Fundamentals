@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/RakibRahman/React-Fundamentals/issues"
   },
-  "homepage": "https://github.com/RakibRahman/React-Fundamentals#readme"
+  "homepage": "https://github.com/RakibRahman/React-Fundamentals#readme",
+  "dependencies": {
+    "moment": "^2.29.1"
+  }
 }
