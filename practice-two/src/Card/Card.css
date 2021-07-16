@@ -1,0 +1,64 @@
+main {
+  width: 80%;
+  margin: 0 auto;
+}
+main h1 {
+  color: red;
+}
+.cards__wrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  place-items: center;
+  gap: 2rem;
+}
+.card {
+  width: 320px;
+  padding: 1rem 0.3rem;
+  display: grid;
+  place-content: center;
+  gap: 0.5rem;
+  background: whitesmoke;
+  border-radius: 10px;
+}
+.card h2 {
+  color: red;
+}
+.mainImg {
+  width: 250px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.mainImg img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+.mainImg .pin {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  color: #ccc;
+  background: white;
+  border-radius: 5px;
+  padding: 2px 5px;
+}
+.miniImages {
+  display: flex;
+  gap: 0.5rem;
+}
+.miniImages img {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.card button {
+  padding: 0.3rem 0;
+  font-size: 16px;
+  color: crimson;
+  cursor: pointer;
+}

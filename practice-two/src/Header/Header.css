@@ -1,0 +1,57 @@
+header {
+  width: 100%;
+  margin-bottom: 3rem;
+  background: whitesmoke;
+  padding-bottom: 1rem;
+}
+.logo {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.logo h1 {
+  cursor: pointer;
+  font-size: 3rem;
+  letter-spacing: 2px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.logo img {
+  display: block;
+  margin: 10px auto;
+  border-radius: 30%;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  cursor: pointer;
+}
+nav {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  /* flex-wrap: wrap; */
+}
+nav .line {
+  width: 60px;
+  height: 3px;
+  background: #ccc;
+}
+nav .links {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+nav .links li {
+  text-align: center;
+  color: gray;
+  cursor: pointer;
+}
+
+nav .links li:first-child {
+  color: crimson;
+}
+nav .links li p:first-child {
+  font-weight: bolder;
+}

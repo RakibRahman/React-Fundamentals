@@ -1,0 +1,25 @@
+.counter {
+  background: deepskyblue;
+  color: white;
+  width: 250px;
+  text-align: center;
+  font-size: 2rem;
+  padding: 1rem;
+  margin: 10px auto;
+}
+.counter .buttons {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.buttons button {
+  background: transparent;
+  outline: none;
+  border: 1px solid white;
+  color: whitesmoke;
+  padding: 5px;
+}
+.red {
+  background: red;
+}
