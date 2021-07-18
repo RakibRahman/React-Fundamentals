@@ -11,7 +11,7 @@ class CountingParent extends React.Component {
   }
 
   handleAction(action) {
-    console.log("child syas", action);
+    console.log("child says", action);
     this.setState({
       clickCount: this.state.clickCount + 1,
     });
@@ -26,7 +26,6 @@ class CountingParent extends React.Component {
       <div>
         <button onClick={this.handleAction}> click me</button>
         <button onClick={this.handleReset}> reset me</button>
-
         <p>Button Clicked {this.state.clickCount} times</p>
       </div>
     );
