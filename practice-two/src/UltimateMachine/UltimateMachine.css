@@ -1,0 +1,21 @@
+.UltimateMachine {
+  margin: 150px auto;
+  width: 300px;
+  text-align: center;
+}
+.UltimateMachine button {
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+.UltimateMachine h1 {
+  margin: 10px 0;
+}
+.active {
+  color: springgreen;
+  transition: all 0.3s ease-in-out;
+}
+.deactivate {
+  color: red;
+  transition: all 0.3s ease-in-out;
+}
