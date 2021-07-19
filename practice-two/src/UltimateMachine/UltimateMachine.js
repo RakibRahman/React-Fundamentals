@@ -18,11 +18,7 @@ const UltimateMachine = (_) => {
     }
   };
   let message;
-  if (isOn) {
-    message = <OnMessage />;
-  } else {
-    message = <OffMessage />;
-  }
+  isOn ? (message = <OnMessage />) : (message = <OffMessage />);
   const onClickHandler = (_) => {
     setIsOn((toggle) => !toggle);
   };
@@ -31,6 +27,7 @@ const UltimateMachine = (_) => {
       <h1>The Ultimate Machine</h1>
       <Message toggle={isOn} />
       {message}
+      {isOn ? <OnMessage /> : <OffMessage />}
       <button type="button" onClick={onClickHandler} aria-pressed={isOn}>
         Toggle Status
       </button>
