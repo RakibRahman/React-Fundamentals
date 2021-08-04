@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import Multiple from "./Multiple";
-import FetchData from "./FetchData";
-
+// import Multiple from "./Multiple";
+// import FetchData from "./FetchData";
+import Form from "./Form";
 function Main() {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const onClickEvent = () => setShow(!show);
   return (
     <>
@@ -15,9 +15,10 @@ function Main() {
         Show/Hide
       </button>
       <hr />
-      <Multiple />
+      {/* <Multiple /> */}
+      <Form />
       <hr />
-      <FetchData />
+      {/* <FetchData /> */}
     </>
   );
 }
