@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 const Form = () => {
-  const [formState, setFormState] = useState({
+  const initialState = {
     firstName: "",
     lastName: "",
     hobby: "Games",
-  });
+  };
+  const [formState, setFormState] = useState(initialState);
   const onFirstChangeHandler = (e) => {
     setFormState({
       ...formState,
@@ -21,6 +22,9 @@ const Form = () => {
     e.preventDefault();
 
     console.log(formState);
+  };
+  const onClickHandler = () => {
+    setFormState(initialState);
   };
   return (
     <>
@@ -56,6 +60,9 @@ const Form = () => {
           <option value="Anime">Anime</option>
         </select>
         <button type="submit">Submit</button>
+        <button type="button" onClick={onClickHandler}>
+          Reset
+        </button>
       </form>
 
       <div>
