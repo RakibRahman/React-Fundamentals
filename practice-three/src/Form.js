@@ -4,6 +4,8 @@ const Form = () => {
     firstName: "",
     lastName: "",
     hobby: "Games",
+    info: "",
+    agree: false,
   };
   const [formState, setFormState] = useState(initialState);
   const onFirstChangeHandler = (e) => {
@@ -57,8 +59,26 @@ const Form = () => {
           }
         >
           <option value="Games">Games</option>
+          <option value="Games">Movie</option>
+          <option value="Games">Drama</option>
           <option value="Anime">Anime</option>
         </select>
+        <br />
+
+        <br />
+        <label htmlFor="info">About Yourself:</label>
+        <textarea
+          id="info"
+          name="info"
+          value={formState.info}
+          onChange={(e) => {
+            setFormState({
+              ...formState,
+              info: e.target.value,
+            });
+          }}
+        />
+        <br />
         <button type="submit">Submit</button>
         <button type="button" onClick={onClickHandler}>
           Reset
