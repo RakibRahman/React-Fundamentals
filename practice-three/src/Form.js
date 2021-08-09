@@ -79,6 +79,20 @@ const Form = () => {
           }}
         />
         <br />
+        <label htmlFor="chkbox">Checkbox:</label>
+        <input
+          type="checkbox"
+          id="chkbox"
+          name="chkbox"
+          checked={formState.agree}
+          onChange={(e) => {
+            setFormState({
+              ...formState,
+              agree: e.target.checked,
+            });
+          }}
+        />
+        <br />
         <button type="submit">Submit</button>
         <button type="button" onClick={onClickHandler}>
           Reset
