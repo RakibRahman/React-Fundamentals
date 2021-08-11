@@ -6,6 +6,9 @@ const Form = () => {
     hobby: "Games",
     info: "",
     agree: false,
+    basic: false,
+    pro: false,
+    ultra: false,
   };
   const [formState, setFormState] = useState(initialState);
   const onFirstChangeHandler = (e) => {
@@ -92,6 +95,48 @@ const Form = () => {
             });
           }}
         />
+        <fieldset>
+          <legend>Select your Plan</legend>
+          <label htmlFor="basic">Basic Plan</label>
+          <input
+            type="checkbox"
+            id="basic"
+            name="basic"
+            checked={formState.basic}
+            onChange={(e) => {
+              setFormState({
+                ...formState,
+                basic: e.target.checked,
+              });
+            }}
+          />
+          <label htmlFor="pro">Pro Plan</label>
+          <input
+            type="checkbox"
+            id="pro"
+            name="pro"
+            checked={formState.pro}
+            onChange={(e) => {
+              setFormState({
+                ...formState,
+                pro: e.target.checked,
+              });
+            }}
+          />
+          <label htmlFor="ultra">Ultra Plan</label>
+          <input
+            type="checkbox"
+            id="ultra"
+            name="ultra"
+            checked={formState.ultra}
+            onChange={(e) => {
+              setFormState({
+                ...formState,
+                ultra: e.target.checked,
+              });
+            }}
+          />
+        </fieldset>
         <br />
         <button type="submit">Submit</button>
         <button type="button" onClick={onClickHandler}>
