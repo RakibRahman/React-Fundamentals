@@ -137,6 +137,10 @@ const Form = () => {
             }}
           />
         </fieldset>
+        <fieldset>
+          <legend>Chose your plan</legend>
+          <label htmlFor="easy"></label>
+        </fieldset>
         <br />
         <button type="submit">Submit</button>
         <button type="button" onClick={onClickHandler}>
