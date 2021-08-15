@@ -9,6 +9,7 @@ const Form = () => {
     basic: false,
     pro: false,
     ultra: false,
+    shirtSize: "",
   };
   const [formState, setFormState] = useState(initialState);
   const onFirstChangeHandler = (e) => {
@@ -138,8 +139,52 @@ const Form = () => {
           />
         </fieldset>
         <fieldset>
-          <legend>Chose your plan</legend>
+          <legend>Chose your T-shirt Size</legend>
           <label htmlFor="easy"></label>
+          <input
+            type="radio"
+            name="shirtSize"
+            id="small"
+            value="s"
+            onChange={(e) => {
+              setFormState({
+                ...formState,
+                shirtSize: e.target.value,
+              });
+            }}
+            checked={formState.shirtSize === "s"}
+          />
+          <label htmlFor="small">Small</label>
+
+          <input
+            type="radio"
+            name="shirtSize"
+            id="medium"
+            value="m"
+            onChange={(e) => {
+              setFormState({
+                ...formState,
+                shirtSize: e.target.value,
+              });
+            }}
+            checked={formState.shirtSize === "m"}
+          />
+          <label htmlFor="small">Medium</label>
+
+          <input
+            type="radio"
+            name="shirtSize"
+            id="large"
+            value="l"
+            onChange={(e) => {
+              setFormState({
+                ...formState,
+                shirtSize: e.target.value,
+              });
+            }}
+            checked={formState.shirtSize === "l"}
+          />
+          <label htmlFor="small">large</label>
         </fieldset>
         <br />
         <button type="submit">Submit</button>
