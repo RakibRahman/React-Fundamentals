@@ -5,19 +5,20 @@ import App from "./App";
 // import Multiple from "./Multiple";
 // import FetchData from "./FetchData";
 import Form from "./Form";
+import Record from "./Record";
 function Main() {
   const [show, setShow] = useState(false);
   const onClickEvent = () => setShow(!show);
   return (
     <>
-      {show && <App />}
+      {/* {show && <App />}
       <button aria-pressed={!show} onClick={onClickEvent}>
         Show/Hide
-      </button>
-      <hr />
+      </button> */}
+
       {/* <Multiple /> */}
-      <Form />
-      <hr />
+      {/* <Form /> */}
+      <Record />
       {/* <FetchData /> */}
     </>
   );
