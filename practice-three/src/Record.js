@@ -1,37 +1,61 @@
 import "./Record.css";
 import React, { useState } from "react";
-const recordsData = [
-  {
-    title: "The Hobbit",
-    author: "J. R. R. Tolkien",
-    description:
-      "The Hobbit, or There and Back Again is a children's fantasy novel",
-  },
-  {
-    title: "The Bad Seed",
-    author: "Oda Miya",
-    description: "About world war 3",
-  },
-];
-const Record = (_) => {
-  const [records, setRecords] = useState(recordsData);
 
-  const Form = (_) => {
+const Record = (_) => {
+  const [records, setRecords] = useState([]);
+  const onSubmitHandler = (entry) => {
+    setRecords([...records, entry]);
+  };
+  const Headline = ({ tagline }) => <h1 className="tagline">{tagline}</h1>;
+  const Form = ({ onSubmit }) => {
+    const initEntry = {
+      title: "",
+      author: "",
+      description: "",
+    };
+    const [entry, setEntry] = useState(initEntry);
+    const formSubmit = (e) => {
+      e.preventDefault();
+      if (!entry.title || !entry.author) return false;
+      console.log(entry);
+      onSubmit({ ...entry }); //! spread to add new data to array
+      setEntry(initEntry);
+    };
+    const onChangeHandler = (e) => {
+      setEntry({
+        ...entry,
+        [e.target.name]: e.target.value,
+      });
+    };
     return (
       <>
-        <form>
+        <form onSubmit={formSubmit}>
           <h3>Add a new Record</h3>
           <label htmlFor="title">Book Title</label>
-          <input type="text" id="title" name="title" />
-
+          <input
+            type="text"
+            id="title"
+            name="title"
+            onChange={onChangeHandler}
+            value={entry.title}
+          />
           <label htmlFor="author">Author</label>
-          <input type="text" id="author" name="author" />
+
+          <input
+            type="text"
+            id="author"
+            onChange={onChangeHandler}
+            name="author"
+            value={entry.author}
+          />
           <label htmlFor="description">Description</label>
           <textarea
             name="description"
             id="description"
             cols="30"
             rows="10"
+            onChange={onChangeHandler}
+            value={entry.description}
           ></textarea>
           <button type="submit">Add</button>
         </form>
@@ -39,10 +63,10 @@ const Record = (_) => {
     );
   };
   const Info = ({ records }) => (
-    <div>
-      {records.map(({ tiitle, author, description }) => (
-        <div key={author}>
-          <h2>{tiitle}</h2>
+    <div className="list-container">
+      {records.map(({ title, author, description }) => (
+        <div key={author} className="list">
+          <h2>{title}</h2>
           <h3>{author}</h3>
           <p>{description}</p>
         </div>
@@ -52,16 +76,16 @@ const Record = (_) => {
 
   const List = (_) => {
     return (
-      <div className="list-container">
+      <div>
         <Info records={records} />
       </div>
     );
   };
   return (
     <div className="container">
-      <h1 className="c-title">My Favorite Records</h1>
+      <Headline tagline="My Favorite Books" />
       <div className="wrapper">
-        <Form />
+        <Form onSubmit={onSubmitHandler} />
         <List />
       </div>
     </div>

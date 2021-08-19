@@ -6,7 +6,7 @@
 .container {
   background: deepskyblue;
 }
-.c-title {
+.tagline {
   text-align: center;
   font-size: 50px;
   letter-spacing: 2px;
@@ -66,4 +66,12 @@ form button {
 }
 .list h2 {
   color: lime;
+}
+
+@media screen and (max-width: 900px) {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
 }
