@@ -1,8 +1,10 @@
 import "./Record.css";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const Record = (_) => {
+  const elementRef = useRef();
   const [records, setRecords] = useState([]);
+  const [borderClr, setBorderClr] = useState(false);
   const onSubmitHandler = (entry) => {
     setRecords([...records, entry]);
   };
@@ -14,12 +16,14 @@ const Record = (_) => {
       description: "",
     };
     const [entry, setEntry] = useState(initEntry);
+
     const formSubmit = (e) => {
       e.preventDefault();
       if (!entry.title || !entry.author) return false;
       console.log(entry);
       onSubmit({ ...entry }); //! spread to add new data to array
       setEntry(initEntry);
+      setBorderClr((e) => !e);
     };
     const onChangeHandler = (e) => {
       setEntry({
@@ -27,6 +31,7 @@ const Record = (_) => {
         [e.target.name]: e.target.value,
       });
     };
+
     return (
       <>
         <form onSubmit={formSubmit}>
@@ -63,9 +68,12 @@ const Record = (_) => {
     );
   };
   const Info = ({ records }) => (
-    <div className="list-container">
+    <div
+      ref={elementRef}
+      className={borderClr ? "list-container apply" : "list-container"}
+    >
       {records.map(({ title, author, description }) => (
-        <div key={author} className="list">
+        <div key={title} className="list">
           <h2>{title}</h2>
           <h3>{author}</h3>
           <p>{description}</p>
