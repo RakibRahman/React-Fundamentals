@@ -1,8 +1,7 @@
 import "./Record.css";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 
 const Record = (_) => {
-  const elementRef = useRef();
   const [records, setRecords] = useState([]);
   const [borderClr, setBorderClr] = useState(false);
   const onSubmitHandler = (entry) => {
@@ -68,10 +67,7 @@ const Record = (_) => {
     );
   };
   const Info = ({ records }) => (
-    <div
-      ref={elementRef}
-      className={borderClr ? "list-container apply" : "list-container"}
-    >
+    <div className={borderClr ? "list-container apply" : "list-container"}>
       {records.map(({ title, author, description }) => (
         <div key={title} className="list">
           <h2>{title}</h2>
