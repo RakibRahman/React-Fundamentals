@@ -70,7 +70,14 @@ form button {
 .list h2 {
   color: lime;
 }
-
+.visually-hidden:not(:focus):not(:active) {
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+}
 @media screen and (max-width: 900px) {
   .wrapper {
     display: flex;

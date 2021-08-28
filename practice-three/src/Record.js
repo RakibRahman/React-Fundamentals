@@ -1,9 +1,11 @@
 import "./Record.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, Fragment } from "react";
 
 const Record = (_) => {
   const [records, setRecords] = useState([]);
   const [borderClr, setBorderClr] = useState(false);
+  const [liveText, setLiveText] = useState("w");
+
   const onSubmitHandler = (entry) => {
     setRecords(
       [...records, entry].sort((a, b) => {
@@ -29,6 +31,7 @@ const Record = (_) => {
       onSubmit({ ...entry }); //! spread to add new data to array
       setEntry(initEntry);
       setBorderClr((e) => !e);
+      setLiveText(`${entry.title} has successfully submitted`);
     };
     const onChangeHandler = (e) => {
       setEntry({
@@ -92,13 +95,18 @@ const Record = (_) => {
     );
   };
   return (
-    <div className="container">
-      <Headline tagline="My Favorite Books" />
-      <div className="wrapper">
-        <Form onSubmit={onSubmitHandler} />
-        <List />
+    <Fragment>
+      <div className="container">
+        <Headline tagline="My Favorite Books" />
+        <div className="wrapper">
+          <Form onSubmit={onSubmitHandler} />
+          <List />
+        </div>
       </div>
-    </div>
+      <div className="visually-hidden" aria-live="polite" aria-atomic="true">
+        {liveText}
+      </div>
+    </Fragment>
   );
 };
 export default Record;
