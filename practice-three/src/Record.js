@@ -1,5 +1,6 @@
 import "./Record.css";
 import React, { useState, Fragment } from "react";
+import Input from "./Input.js";
 
 const Record = (_) => {
   const [records, setRecords] = useState([]);
@@ -44,32 +45,26 @@ const Record = (_) => {
       <>
         <form onSubmit={formSubmit}>
           <h3>Add a new Record</h3>
-          <label htmlFor="title">Book Title</label>
-          <input
-            type="text"
-            id="title"
+
+          <Input
+            labelText="Book Name"
             name="title"
             onChange={onChangeHandler}
             value={entry.title}
           />
-          <label htmlFor="author">Author</label>
-
-          <input
-            type="text"
-            id="author"
+          <Input
+            labelText="Book Author"
             onChange={onChangeHandler}
-            name="author"
             value={entry.author}
+            name="author"
           />
-          <label htmlFor="description">Description</label>
-          <textarea
+          <Input
+            type="textarea"
             name="description"
-            id="description"
-            cols="30"
-            rows="10"
-            onChange={onChangeHandler}
+            labelText="Description"
             value={entry.description}
-          ></textarea>
+            onChange={onChangeHandler}
+          />
           <button type="submit">Add</button>
         </form>
       </>

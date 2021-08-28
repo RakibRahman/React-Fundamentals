@@ -41,6 +41,8 @@ form textarea {
   padding: 5px;
   border-radius: 10px;
   outline: none;
+  width: 80%;
+  height: 100px;
 }
 form button {
   padding: 5px 8px;
