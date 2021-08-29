@@ -1,0 +1,9 @@
+.joke_wrapper {
+  width: 400px;
+  border: 2px solid #ff5f1f;
+  padding: 5px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  gap: 0.5em;
+}
