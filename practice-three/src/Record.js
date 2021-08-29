@@ -1,5 +1,5 @@
 import "./Record.css";
-import React, { useState, Fragment } from "react";
+import React, { useRef, useState, Fragment, useEffect } from "react";
 import Input from "./Input.js";
 
 const Record = (_) => {

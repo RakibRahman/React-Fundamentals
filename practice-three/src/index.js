@@ -5,6 +5,7 @@ import App from "./App";
 // import Multiple from "./Multiple";
 // import FetchData from "./FetchData";
 import Form from "./Form";
+import Jokes from "./Jokes";
 import Record from "./Record";
 function Main() {
   const [show, setShow] = useState(false);
@@ -29,3 +30,5 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
+
+ReactDOM.render(<Jokes />, document.getElementById("root2"));
