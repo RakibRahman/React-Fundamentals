@@ -6,6 +6,7 @@ import App from "./App";
 // import FetchData from "./FetchData";
 import Form from "./Form";
 import Jokes from "./Jokes";
+import Toggle from "./Toggle";
 import Record from "./Record";
 function Main() {
   const [show, setShow] = useState(false);
@@ -20,7 +21,13 @@ function Main() {
       {/* <Multiple /> */}
       {/* <Form /> */}
       <Record />
+
       {/* <FetchData /> */}
+
+      <div className="joke-toggle">
+        <Jokes />
+        <Toggle />
+      </div>
     </>
   );
 }
@@ -30,5 +37,3 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
-
-ReactDOM.render(<Jokes />, document.getElementById("root2"));

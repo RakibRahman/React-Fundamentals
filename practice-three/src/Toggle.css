@@ -1,0 +1,25 @@
+.light-theme {
+  --primary-color: #007bff;
+  --section-color: #f14e0d;
+  --disabled-color: #6c757d;
+}
+.dark-theme {
+  --primary-color: red;
+  --disabled-color: #4a4a4b;
+}
+.toggle__wrapper {
+  display: grid;
+  place-items: center;
+  gap: 1rem;
+  width: 300px;
+  border: 1px solid var(--primary-color);
+  background-color: var(--section-color);
+  padding: 5px;
+}
+.toggle__wrapper button {
+  width: 80px;
+  padding: 3px 5px;
+  font-size: 18px;
+  color: white;
+  background: var(--primary-color);
+}
