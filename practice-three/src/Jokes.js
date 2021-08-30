@@ -13,10 +13,7 @@ class Jokes extends React.Component {
   componentDidMount() {
     axios.get(`https://api.chucknorris.io/jokes/random`).then((response) => {
       const joke = response.data.value;
-      const icon = response.data.icon_url;
-      this.setState({ data: [...this.state.data, joke, icon] });
-
-      console.log(this.state.data);
+      this.setState({ data: [...this.state.data, joke] });
     });
   }
 
@@ -24,9 +21,12 @@ class Jokes extends React.Component {
     return (
       <div>
         <h1>Joke</h1>
-        <img className="icon" src={this.state.data[1]} alt="icon" />
+        <img
+          className="icon"
+          src="https://assets.chucknorris.host/img/avatar/chuck-norris.png"
+          alt="icon"
+        />
         <p className="joke">{this.state.data[0]}</p>
-        <h1>{this.state.reqKey}</h1>
       </div>
     );
   }
@@ -37,7 +37,6 @@ class JokeMania extends React.Component {
   };
   handleClick = () => {
     this.setState({ reqKey: Math.random() });
-    console.log(this.state.reqKey);
   };
   render() {
     return (
