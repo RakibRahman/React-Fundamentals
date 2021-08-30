@@ -7,13 +7,16 @@ class Jokes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
+      // data:[],
+      data: "",
+      icon: "https://assets.chucknorris.host/img/avatar/chuck-norris.png",
     };
   }
   componentDidMount() {
     axios.get(`https://api.chucknorris.io/jokes/random`).then((response) => {
       const joke = response.data.value;
-      this.setState({ data: [...this.state.data, joke] });
+      this.setState({ data: joke });
+      // this.setState({ data: [...this.state.data, joke] });
     });
   }
 
@@ -21,12 +24,8 @@ class Jokes extends React.Component {
     return (
       <div>
         <h1>Joke</h1>
-        <img
-          className="icon"
-          src="https://assets.chucknorris.host/img/avatar/chuck-norris.png"
-          alt="icon"
-        />
-        <p className="joke">{this.state.data[0]}</p>
+        <img className="icon" src={this.state.icon} alt="icon" />
+        <p className="joke">{this.state.data}</p>
       </div>
     );
   }
