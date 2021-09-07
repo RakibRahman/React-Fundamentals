@@ -1,0 +1,10 @@
+.wrapper {
+  width: 900px;
+  margin: 120px auto;
+}
+.btn {
+  padding: 0.2rem 0.5rem;
+  background: #ea00ea;
+  color: white;
+  cursor: pointer;
+}
