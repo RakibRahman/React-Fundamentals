@@ -17,9 +17,9 @@ function Menu() {
   };
   const showHandler = (e) => {
     setShowAll(true);
-    console.log(e.target);
   };
-
+  const filterItems = (list) =>
+    list.filter((item) => (showAll ? true : item.type === category));
   return (
     <div className="menu__wrapper">
       <h1>Menu List</h1>
@@ -30,18 +30,16 @@ function Menu() {
         <Button type="luxury" clr="hotpink" />
       </div>
       <div className="card__wrapper">
-        {menuData
-          .filter((item) => (showAll ? true : item.type === category))
-          .map((item) => {
-            return (
-              <div className="menu__card" key={item.model}>
-                <img src={item.pic} alt="ss" />
-                <h1>{item.model}</h1>
-                <p>{item.type}</p>
-                <p>{item.price}</p>
-              </div>
-            );
-          })}
+        {filterItems(menuData).map((item) => {
+          return (
+            <div className="menu__card" key={item.model}>
+              <img src={item.pic} alt="ss" />
+              <h1>{item.model}</h1>
+              <p>{item.type}</p>
+              <p>{item.price}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

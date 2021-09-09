@@ -1,0 +1,19 @@
+.App {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(100% + 2vmin);
+  color: white;
+}
+
+.active {
+  text-decoration: line-through;
+  color: crimson;
+}
+.label {
+  color: seagreen;
+  text-decoration: none;
+}
