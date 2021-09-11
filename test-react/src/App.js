@@ -9,7 +9,6 @@ function App() {
   const [items, setItems] = useState(data);
   const [newTask, setNewTask] = useState("");
   const [search, setSearch] = useState("");
-  const [sort, setSort] = useState("a-z");
   const saveAndSetTask = (taskList) => {
     setItems(taskList);
     localStorage.setItem("taskList", JSON.stringify(taskList));
@@ -33,44 +32,31 @@ function App() {
     const taskList = [...items, newTask];
     saveAndSetTask(taskList);
   };
-  const sortTask = () => {
-    const taskList = [...items].sort((a, b) => {
-      if (a.task < b.task) return -1;
-      if (a.task > b.task) return 1;
-      return 0;
-    });
 
-    saveAndSetTask(taskList);
-    console.log("ok");
-  };
   const onChangeSort = (e) => {
-    console.log(e.target.value);
-
     if (e.target.value === "a-z") {
-      console.log("sort a-z");
-
-      const taskList = [...items].sort((a, b) => {
-        if (a.task < b.task) return -1;
-        return 0;
-      });
-      saveAndSetTask(taskList);
-    }
-    if (e.target.value === "z-a") {
-      console.log("sort z-a");
-      const taskList = [...items].sort((a, b) => {
-        if (a.task < b.task) return 1;
-        return 0;
-      });
-      saveAndSetTask(taskList);
-    }
-    if (e.target.value === "usual") {
-      console.log("sort usual");
       const taskList = [...items].sort((a, b) => {
         if (a.task > b.task) return 1;
         return 0;
       });
       saveAndSetTask(taskList);
     }
+    if (e.target.value === "z-a") {
+      const taskList = [...items].sort((a, b) => {
+        if (a.task < b.task) return 1;
+        return 0;
+      });
+      saveAndSetTask(taskList);
+    }
+    if (e.target.value === "completed") {
+      const taskList = [...items].sort((a, b) => b.checked - a.checked);
+      saveAndSetTask(taskList);
+    }
+    if (e.target.value === "uncompleted") {
+      const taskList = [...items].sort((a, b) => a.checked - b.checked);
+      saveAndSetTask(taskList);
+    }
+    console.log(items);
   };
   //! on form submit
   const onSubmitHandler = (e) => {
@@ -89,12 +75,14 @@ function App() {
         setNewTask={setNewTask}
       />
       <SearchItem search={search} setSearch={setSearch} />
-      <button onClick={sortTask}>Sort</button>
+
       <form onSubmit={(e) => e.preventDefault()}>
         <select name="sortTask" id="sortTask" onChange={onChangeSort}>
-          <option value="a-z">A-Z</option>
-          <option value="z-a">Z-A</option>
-          <option value="usual">Usual</option>
+          <option value="sort">Sort Task By...</option>
+          <option value="a-z">↗ A-Z</option>
+          <option value="z-a">↖ Z-A</option>
+          <option value="completed">Completed</option>
+          <option value="uncompleted">Uncompleted</option>
         </select>
       </form>
       <TaskItem
@@ -105,8 +93,8 @@ function App() {
         deleteHandler={deleteHandler}
       />
       <p className="total">
-        Total {items.length}{" "}
-        {items.length === 1 || items.length === 0 ? "Task" : "Tasks"}
+        Total {items.length}
+        {items.length === 1 || items.length === 0 ? " Task" : " Tasks"}
       </p>
     </div>
   );
