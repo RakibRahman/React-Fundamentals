@@ -12,8 +12,40 @@
 .active {
   text-decoration: line-through;
   color: crimson;
+  font-weight: 400;
 }
 .label {
   color: seagreen;
   text-decoration: none;
+  font-weight: bold;
+  word-break: break-all;
+}
+input[type="checkbox"] {
+  accent-color: red;
+  height: 25px;
+  width: 25px;
+}
+input[type="text"],
+input[type="search"] {
+  color: seagreen;
+  background: transparent;
+  padding: 0.5rem;
+  width: 300px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  margin: 10px 0;
+  accent-color: crimson;
+}
+input[type="search"] {
+  border-bottom: 1px solid #ccc;
+}
+button {
+  width: 45px;
+  height: 25px;
+  padding: 0.2rem;
+  font-size: 16px;
+}
+.total {
+  color: whitesmoke;
 }
