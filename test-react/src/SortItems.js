@@ -1,32 +1,28 @@
 import React from "react";
 
 function SortItems({ items, setItems }) {
-  const saveAndSetTask = (taskList) => {
-    setItems(taskList);
-    localStorage.setItem("taskList", JSON.stringify(taskList));
-  };
   const onChangeSort = (e) => {
     if (e.target.value === "a-z") {
       const taskList = [...items].sort((a, b) => {
         if (a.task > b.task) return 1;
         return 0;
       });
-      saveAndSetTask(taskList);
+      setItems(taskList);
     }
     if (e.target.value === "z-a") {
       const taskList = [...items].sort((a, b) => {
         if (a.task < b.task) return 1;
         return 0;
       });
-      saveAndSetTask(taskList);
+      setItems(taskList);
     }
     if (e.target.value === "completed") {
       const taskList = [...items].sort((a, b) => b.checked - a.checked);
-      saveAndSetTask(taskList);
+      setItems(taskList);
     }
     if (e.target.value === "uncompleted") {
       const taskList = [...items].sort((a, b) => a.checked - b.checked);
-      saveAndSetTask(taskList);
+      setItems(taskList);
     }
   };
   return (

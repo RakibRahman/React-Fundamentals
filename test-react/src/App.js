@@ -5,6 +5,7 @@ import AddItem from "./AddItem";
 import SearchItem from "./SearchItem";
 import TaskItem from "./TaskItem";
 import SortItems from "./SortItems";
+
 function App() {
   const data = JSON.parse(localStorage.getItem("taskList")) || [];
   const [items, setItems] = useState(data);
@@ -12,26 +13,23 @@ function App() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    const left = [...items].filter((item) => item.checked === false);
+    localStorage.setItem("taskList", JSON.stringify(items));
 
+    const left = [...items].filter((item) => item.checked === false);
     document.title = `Task List || ${left.length} ${
       left.length === 1 ? " Task" : " Tasks"
     } To Complete`;
   }, [items]);
 
-  const saveAndSetTask = (taskList) => {
-    setItems(taskList);
-    localStorage.setItem("taskList", JSON.stringify(taskList));
-  };
   const checkHandler = (id) => {
     const taskList = items.map((item) =>
       item.id === id ? { ...item, checked: !item.checked } : item
     );
-    saveAndSetTask(taskList);
+    setItems(taskList);
   };
   const deleteHandler = (id) => {
     const taskList = items.filter((item) => item.id !== id); //return false
-    saveAndSetTask(taskList);
+    setItems(taskList);
   };
   const addTask = (task) => {
     const newTask = {
@@ -40,7 +38,7 @@ function App() {
       task,
     };
     const taskList = [...items, newTask];
-    saveAndSetTask(taskList);
+    setItems(taskList);
   };
 
   //! on form submit
@@ -59,7 +57,7 @@ function App() {
         newTask={newTask}
         setNewTask={setNewTask}
       />
-      <SearchItem search={search} setSearch={setSearch} />
+      <SearchItem search={search} setSearch={setSearch} setItems={setItems} />
 
       <SortItems items={items} setItems={setItems} />
 

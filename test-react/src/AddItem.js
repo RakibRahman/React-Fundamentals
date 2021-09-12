@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 function AddItem({ newTask, setNewTask, onSubmitHandler }) {
+  const inputRef = useRef();
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
   return (
     <form
       onSubmit={onSubmitHandler}
@@ -12,6 +16,7 @@ function AddItem({ newTask, setNewTask, onSubmitHandler }) {
     >
       <label htmlFor="newTask">
         <input
+          ref={inputRef}
           type="text"
           placeholder="add new task"
           name="newTask"
@@ -21,7 +26,13 @@ function AddItem({ newTask, setNewTask, onSubmitHandler }) {
         />
       </label>
 
-      <button type="submit">Add</button>
+      <button
+        type="submit"
+        aria-label="add new task"
+        onClick={() => inputRef.current.focus()}
+      >
+        Add
+      </button>
     </form>
   );
 }
