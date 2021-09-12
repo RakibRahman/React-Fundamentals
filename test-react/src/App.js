@@ -12,6 +12,8 @@ function App() {
   const [newTask, setNewTask] = useState("");
   const [search, setSearch] = useState("");
 
+  const API_URL = `http://localhost:3500/items`;
+
   useEffect(() => {
     localStorage.setItem("taskList", JSON.stringify(items));
 
@@ -46,7 +48,6 @@ function App() {
     e.preventDefault();
     addTask(newTask);
     setNewTask("");
-    console.log(items);
   };
 
   return (
