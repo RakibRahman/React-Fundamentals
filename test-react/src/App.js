@@ -7,21 +7,42 @@ import TaskItem from "./TaskItem";
 import SortItems from "./SortItems";
 
 function App() {
-  const data = JSON.parse(localStorage.getItem("taskList")) || [];
-  const [items, setItems] = useState(data);
+  // const data = JSON.parse(localStorage.getItem("taskList")) || [];
+  const [items, setItems] = useState([]);
   const [newTask, setNewTask] = useState("");
   const [search, setSearch] = useState("");
-
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   const API_URL = `http://localhost:3500/items`;
 
   useEffect(() => {
-    localStorage.setItem("taskList", JSON.stringify(items));
+    // localStorage.setItem("taskList", JSON.stringify(items));
 
     const left = [...items].filter((item) => item.checked === false);
     document.title = `Task List || ${left.length} ${
       left.length === 1 ? " Task" : " Tasks"
     } To Complete`;
   }, [items]);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(API_URL);
+      if (!response.ok) throw Error("fetching data is interrupted");
+      const tasks = await response.json();
+      console.log(tasks);
+      setItems(tasks);
+      setError(null);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    setTimeout(() => {
+      fetchData();
+    }, 2000);
+  }, []);
 
   const checkHandler = (id) => {
     const taskList = items.map((item) =>
@@ -62,17 +83,25 @@ function App() {
 
       <SortItems items={items} setItems={setItems} />
 
-      <TaskItem
-        items={items.filter((item) =>
-          item.task.toLowerCase().includes(search.toLowerCase())
+      <main>
+        {loading && <p className="loading">Loading.....</p>}
+        {error && <p className="err">{`Error: ${error}`}</p>}
+        {!error && !loading && (
+          <TaskItem
+            items={items.filter((item) =>
+              item.task.toLowerCase().includes(search.toLowerCase())
+            )}
+            checkHandler={checkHandler}
+            deleteHandler={deleteHandler}
+          />
         )}
-        checkHandler={checkHandler}
-        deleteHandler={deleteHandler}
-      />
-      <p className="total">
-        Total {items.length}
-        {items.length === 1 || items.length === 0 ? " Task" : " Tasks"}
-      </p>
+      </main>
+      {!error && (
+        <footer className="total">
+          Total {items.length}
+          {items.length === 1 || items.length === 0 ? " Task" : " Tasks"}
+        </footer>
+      )}
     </div>
   );
 }

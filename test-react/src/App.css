@@ -49,3 +49,33 @@ button {
 .total {
   color: whitesmoke;
 }
+.err {
+  text-align: center;
+  margin: 10px 0;
+  animation: error 1s ease-in-out 0s 3 forwards;
+}
+@keyframes error {
+  0% {
+    color: whitesmoke;
+  }
+  50% {
+    color: slateblue;
+  }
+  100% {
+    color: crimson;
+  }
+}
+.loading {
+  margin: 10px 0;
+
+  text-align: center;
+  animation: loading 1s linear infinite;
+}
+@keyframes loading {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
