@@ -5,7 +5,7 @@ import AddItem from "./AddItem";
 import SearchItem from "./SearchItem";
 import TaskItem from "./TaskItem";
 import SortItems from "./SortItems";
-
+import apiReq from "./apiReq";
 function App() {
   // const data = JSON.parse(localStorage.getItem("taskList")) || [];
   const [items, setItems] = useState([]);
@@ -16,8 +16,6 @@ function App() {
   const API_URL = `http://localhost:3500/items`;
 
   useEffect(() => {
-    // localStorage.setItem("taskList", JSON.stringify(items));
-
     const left = [...items].filter((item) => item.checked === false);
     document.title = `Task List || ${left.length} ${
       left.length === 1 ? " Task" : " Tasks"
@@ -41,20 +39,40 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       fetchData();
-    }, 2000);
+    }, 200);
   }, []);
 
-  const checkHandler = (id) => {
+  const checkHandler = async (id) => {
     const taskList = items.map((item) =>
       item.id === id ? { ...item, checked: !item.checked } : item
     );
     setItems(taskList);
+
+    const itemsUpdated = taskList.filter((item) => item.id === id);
+    const updateOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ checked: itemsUpdated[0].checked }),
+    };
+    const reqUrl = `${API_URL}/${id}`;
+    const result = await apiReq(reqUrl, updateOptions);
+    if (result) setError(result);
   };
-  const deleteHandler = (id) => {
+  const deleteHandler = async (id) => {
     const taskList = items.filter((item) => item.id !== id); //return false
     setItems(taskList);
+
+    // const delItems = taskList.filter((item) => item.id === id);
+    const delOptions = {
+      method: "DELETE",
+      // headers: { "Content-Type": "application/json" },
+      // body: JSON.stringify({ id: delItems[0].id }),
+    };
+    const reqUrl = `${API_URL}/${id}`;
+    const result = await apiReq(reqUrl, delOptions);
+    if (result) setError(result);
   };
-  const addTask = (task) => {
+  const addTask = async (task) => {
     const newTask = {
       id: uniqid(),
       checked: false,
@@ -62,6 +80,12 @@ function App() {
     };
     const taskList = [...items, newTask];
     setItems(taskList);
+    const postOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newTask),
+    };
+    const result = await apiReq(API_URL, postOptions);
   };
 
   //! on form submit
