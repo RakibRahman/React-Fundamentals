@@ -57,7 +57,7 @@ export function AuthProvider({ children }) {
       });
   }
   function updateEmail(email) {
-    return auth
+    return currentUser
       .updateEmail(email)
       .then(() => {
         console.log("password updated successfully");
@@ -67,7 +67,7 @@ export function AuthProvider({ children }) {
       });
   }
   function updatePassword(password) {
-    return auth
+    return currentUser
       .updateEmail(password)
       .then(() => {
         console.log("email updated successfully");

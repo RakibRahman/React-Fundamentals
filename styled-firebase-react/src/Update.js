@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
 const Form = styled.form`
-  height: 450px;
+  height: 480px;
   width: 400px;
   background: rgba(255, 255, 255, 0.13);
   position: absolute;
@@ -22,6 +22,7 @@ const Title = styled.h1`
   font-weight: bold;
   letter-spacing: 2px;
   text-align: center;
+  margin-bottom: 10px;
 `;
 const Input = styled.input`
   padding: 0.5rem 0.2rem;
@@ -32,6 +33,9 @@ const Input = styled.input`
   border-radius: 0.5rem;
   font-size: 1.2rem;
   outline: none;
+  &::placeholder {
+    font-size: 16px;
+  }
 `;
 const Button = styled.button`
   color: #fff;
@@ -50,6 +54,10 @@ const ButtonWrapper = styled.div`
   align-items: center;
   flex-direction: column;
 `;
+const Label = styled.label`
+  color: mediumaquamarine;
+  font-size: 18px;
+`;
 function Update() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -57,48 +65,68 @@ function Update() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { currentUser } = useAuth();
-  //   const history = useHistory();
-  const onSubmit = async (e) => {
+  const { currentUser, updateEmail, updatePassword } = useAuth();
+  const history = useHistory();
+  const onSubmit = (e) => {
     e.preventDefault();
-    //     if (passwordConfirm !== password) {
-    //       return setError("Password does not match");
-    //     }
-    //     try {
-    //       setLoading(true);
-    //       setError("");
-    //       await signUp(email, password);
-    //       history.push("/dashboard");
-    //     } catch {
-    //       setError("Account Creation failed");
-    //       console.log(error);
-    //     }
-    //     setLoading(false);
+    if (passwordConfirm !== password) {
+      return setError("Password does not match");
+    }
+    setLoading(true);
+    setError("");
+    const promises = [];
+    if (email !== currentUser.email) {
+      promises.push(updateEmail(email));
+    }
+    if (password !== currentUser.password) {
+      promises.push(updatePassword(password));
+    }
+    Promise.all(promises)
+      .then(() => {
+        history.push("/dashboard");
+      })
+      .catch((err) => {
+        setError(err.message);
+      })
+      .finally(() => {
+        console.log("details updated successfully");
+
+        setLoading(false);
+      });
   };
 
   return (
     <Form onSubmit={onSubmit}>
-      <Title>Sign Up</Title>
+      <Title>Update Profile</Title>
 
       {error && <p>{error}</p>}
-      <Input
-        type="text"
-        placeholder="Enter user/email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <Input
-        type="text"
-        placeholder="Enter Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <Input
-        type="text"
-        placeholder="Repeat Password"
-        value={passwordConfirm}
-        onChange={(e) => setPasswordConfirm(e.target.value)}
-      />
+      <Label>
+        Email:
+        <Input
+          type="text"
+          placeholder="Enter user/email"
+          defaultValue={currentUser.email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </Label>
+      <Label>
+        Password:
+        <Input
+          type="text"
+          placeholder="leave blank to keep same password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </Label>
+      <Label>
+        Repeat Password:
+        <Input
+          type="text"
+          placeholder="leave blank to keep same password"
+          value={passwordConfirm}
+          onChange={(e) => setPasswordConfirm(e.target.value)}
+        />
+      </Label>
 
       <ButtonWrapper>
         <Button type="submit" disabled={loading}>

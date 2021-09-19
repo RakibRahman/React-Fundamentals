@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
@@ -50,6 +51,8 @@ const ButtonWrapper = styled.div`
   align-items: center;
   flex-direction: column;
 `;
+const notifyError = (str) => toast.error(str);
+const notifySuccess = (str) => toast.success(str);
 function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -62,15 +65,19 @@ function SignUp() {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (passwordConfirm !== password) {
+      notifyError("Password does not match");
       return setError("Password does not match");
     }
     try {
       setLoading(true);
       setError("");
       await signUp(email, password);
-      history.push("/dashboard");
+      notifySuccess("Account created successfully");
+      setTimeout(() => {
+        history.push("/dashboard");
+      }, 2000);
     } catch {
-      setError("Account Creation failed");
+      notifyError("An error occurred");
       console.log(error);
     }
     setLoading(false);
@@ -79,10 +86,12 @@ function SignUp() {
   return (
     <Form onSubmit={onSubmit}>
       <Title>Sign Up</Title>
+      <Toaster />
+
       {/* <p style={{ backgroundColor: "red" }}>
         {currentUser && currentUser.email}
       </p> */}
-      {error && <p>{error}</p>}
+      {/* {error && <p>{error}</p>} */}
       <Input
         type="text"
         placeholder="Enter user/email"

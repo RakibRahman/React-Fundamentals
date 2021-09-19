@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import toast, { Toaster } from "react-hot-toast";
+
 import { useAuth } from "./context/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 const Form = styled.form`
@@ -50,11 +52,13 @@ const ButtonWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+const notifyError = (str) => toast.error(str);
+const notifySuccess = (str) => toast.success(str);
 function Log() {
   const { logIn } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const onSubmit = async (e) => {
@@ -62,11 +66,14 @@ function Log() {
 
     try {
       setLoading(true);
-      setError("");
+      // setError("");
       await logIn(email, password);
-      history.push("/dashboard");
+      notifySuccess("Logged in successfully");
+      setTimeout(() => {
+        history.push("/dashboard");
+      }, 2000);
     } catch {
-      setError("Log In Failed - Invalid Email || Password");
+      notifyError("Invalid Email || Password");
     }
     setLoading(false);
   };
@@ -74,8 +81,8 @@ function Log() {
   return (
     <Form onSubmit={onSubmit}>
       <Title>Log In</Title>
-
-      {error && <p>{error}</p>}
+      <Toaster />
+      {/* {error && <p>{error}</p>} */}
 
       <Input
         type="text"

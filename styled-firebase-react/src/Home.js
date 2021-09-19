@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 const Button = styled.button`
   color: #fff;
-  background-color: #f14e0d;
+  background-color: ${(props) => (props.primary ? "seagreen" : " #f14e0d")};
   padding: 0.2rem;
-  width: 80px;
+  width: auto;
   font-size: ${(props) => (props.small ? "1rem" : "1.2rem")};
   border: none;
   cursor: pointer;
@@ -21,7 +21,7 @@ const ButtonWrapper = styled.div`
 `;
 const Title = styled.h1`
   font-size: ${(props) => (props.big ? "4rem" : "2rem")};
-  color: #f14e0d;
+  color: ${(props) => (props.primary ? "seagreen" : " #f14e0d")};
   font-weight: bold;
   letter-spacing: 2px;
   text-align: center;
@@ -37,7 +37,7 @@ function Home() {
     <Wrapper>
       <Title big>Welcome</Title>
       <ButtonWrapper>
-        <Title> FireBase Authentication</Title>
+        <Title primary> FireBase Authentication</Title>
         <Link to="/login">
           <Button>Log In</Button>
         </Link>
@@ -45,7 +45,7 @@ function Home() {
           <Button>Sign Up</Button>
         </Link>
         <Link to="/dashboard">
-          <Button>Dashboard</Button>
+          <Button primary>Dashboard</Button>
         </Link>
       </ButtonWrapper>
     </Wrapper>
