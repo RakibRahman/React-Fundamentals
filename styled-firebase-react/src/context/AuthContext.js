@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../firebase";
 const AuthContext = React.createContext();
@@ -23,41 +24,80 @@ export function AuthProvider({ children }) {
       });
   }
   function logIn(email, password) {
-    return auth
-      .signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        console.log("logged in successfully");
-      })
-      .catch((err) => {
-        console.log(err.message, err.code);
-      });
+    return auth.signInWithEmailAndPassword(email, password);
+    // .then((user) => {
+    //   console.log(user);
+    //   console.log("logged in successfully");
+    // })
+    // .catch((err) => {
+    //   console.log(err.message);
+    // });
   }
   function logOut() {
     return auth
       .signOut()
       .then(() => {
-        console.log(" Sign-out successful.");
+        console.log("Sign-out successful.");
       })
       .catch((error) => {
         console.log(error.message);
       });
   }
+  function resetPassword(email) {
+    auth
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        console.log("reset email send");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, "--", errorMessage);
+        // ..
+      });
+  }
+  function updateEmail(email) {
+    return auth
+      .updateEmail(email)
+      .then(() => {
+        console.log("password updated successfully");
+      })
+      .catch(() => {
+        console.log("some error occurred during updating password");
+      });
+  }
+  function updatePassword(password) {
+    return auth
+      .updateEmail(password)
+      .then(() => {
+        console.log("email updated successfully");
+      })
+      .catch(() => {
+        console.log("some error occurred during updating email");
+      });
+  }
   useEffect(() => {
+    let isMounted = true;
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
+      if (isMounted) setCurrentUser(user);
 
       //stores information about current logged userPass
-      console.log(currentUser);
 
       setLoading(false);
     });
-    return unsubscribe;
+    return () => {
+      isMounted = false;
+      unsubscribe();
+    };
   }, []);
   const value = {
     currentUser,
     signUp,
     logIn,
     logOut,
+    resetPassword,
+    updateEmail,
+    updatePassword,
   };
 
   return (

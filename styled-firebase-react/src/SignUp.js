@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
 const Form = styled.form`
-  height: 520px;
+  height: 450px;
   width: 400px;
   background: rgba(255, 255, 255, 0.13);
   position: absolute;
@@ -43,9 +43,6 @@ const Button = styled.button`
   cursor: pointer;
   border-radius: 0.5rem;
   margin: 0 auto;
-  disabled {
-    opacity: 0.2;
-  }
 `;
 const ButtonWrapper = styled.div`
   display: flex;
@@ -74,6 +71,7 @@ function SignUp() {
       history.push("/dashboard");
     } catch {
       setError("Account Creation failed");
+      console.log(error);
     }
     setLoading(false);
   };

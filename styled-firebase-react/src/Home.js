@@ -44,6 +44,9 @@ function Home() {
         <Link to="/signup">
           <Button>Sign Up</Button>
         </Link>
+        <Link to="/dashboard">
+          <Button>Dashboard</Button>
+        </Link>
       </ButtonWrapper>
     </Wrapper>
   );

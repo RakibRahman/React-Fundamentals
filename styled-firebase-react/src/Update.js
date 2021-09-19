@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useAuth } from "./context/AuthContext";
 import { Link, useHistory } from "react-router-dom";
+import { useAuth } from "./context/AuthContext";
 const Form = styled.form`
-  height: 420px;
+  height: 450px;
   width: 400px;
   background: rgba(255, 255, 255, 0.13);
   position: absolute;
@@ -35,7 +35,7 @@ const Input = styled.input`
 `;
 const Button = styled.button`
   color: #fff;
-  background-color: ${(props) => (props.red ? "crimson" : "#f14e0d")};
+  background-color: #f14e0d;
   padding: 0.2rem;
   width: 80px;
   font-size: ${(props) => (props.small ? "1rem" : "1.2rem")};
@@ -47,36 +47,40 @@ const Button = styled.button`
 const ButtonWrapper = styled.div`
   display: flex;
   gap: 0.5rem;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
 `;
-function Log() {
-  const { logIn } = useAuth();
+function Update() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
+
+  const { currentUser } = useAuth();
+  //   const history = useHistory();
   const onSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      setLoading(true);
-      setError("");
-      await logIn(email, password);
-      history.push("/dashboard");
-    } catch {
-      setError("Log In Failed - Invalid Email || Password");
-    }
-    setLoading(false);
+    //     if (passwordConfirm !== password) {
+    //       return setError("Password does not match");
+    //     }
+    //     try {
+    //       setLoading(true);
+    //       setError("");
+    //       await signUp(email, password);
+    //       history.push("/dashboard");
+    //     } catch {
+    //       setError("Account Creation failed");
+    //       console.log(error);
+    //     }
+    //     setLoading(false);
   };
 
   return (
     <Form onSubmit={onSubmit}>
-      <Title>Log In</Title>
+      <Title>Sign Up</Title>
 
       {error && <p>{error}</p>}
-
       <Input
         type="text"
         placeholder="Enter user/email"
@@ -89,18 +93,22 @@ function Log() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
+      <Input
+        type="text"
+        placeholder="Repeat Password"
+        value={passwordConfirm}
+        onChange={(e) => setPasswordConfirm(e.target.value)}
+      />
+
       <ButtonWrapper>
         <Button type="submit" disabled={loading}>
-          Log In
+          Update
         </Button>
-        <Link to="/signup">Need An Account?</Link>
-        <Link to="/reset" style={{ color: "red" }}>
-          Forget Password?
-        </Link>
-        <Link to="/">Return to Home</Link>
+
+        <Link to="/dashboard">back to Dashboard</Link>
       </ButtonWrapper>
     </Form>
   );
 }
 
-export default Log;
+export default Update;

@@ -15,11 +15,27 @@ function Dashboard() {
       setError(err.message);
     }
   };
+  const Div = () => (
+    <div>
+      <Link to="update">Update Profile</Link>
+    </div>
+  );
+  const SIgnOut = () => <button onClick={handleLogOut}>Sign Out?</button>;
   return (
     <div>
-      <h1> welcome {currentUser && currentUser.email}</h1>
+      <h1>User Dashboard</h1>
+      <h3>
+        {currentUser ? (
+          `welcome ${currentUser.email}`
+        ) : (
+          <Link to="/login">Log In now</Link>
+        )}
+      </h3>
       {error && <p>{error}</p>}
-      <button onClick={handleLogOut}>Sign Out?</button>
+      {currentUser && <Div />}
+      {currentUser && <SIgnOut />}
+
+      <Link to="/">Return to Home</Link>
     </div>
   );
 }

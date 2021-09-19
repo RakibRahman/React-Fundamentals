@@ -50,57 +50,57 @@ const ButtonWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-function Log() {
-  const { logIn } = useAuth();
+function Reset() {
+  const { resetPassword } = useAuth();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const [popup, setPopup] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const onSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      setPopup("");
       setLoading(true);
       setError("");
-      await logIn(email, password);
-      history.push("/dashboard");
+      await resetPassword(email);
+      setPopup("Password reset email sent -redirecting to Log In Page");
+      setTimeout(() => {
+        history.push("/login");
+      }, 3000);
     } catch {
-      setError("Log In Failed - Invalid Email || Password");
+      setError("Reset operation Failed");
     }
     setLoading(false);
   };
 
   return (
     <Form onSubmit={onSubmit}>
-      <Title>Log In</Title>
+      <Title>Reset Password</Title>
 
       {error && <p>{error}</p>}
-
+      {popup && <p>{popup}</p>}
       <Input
-        type="text"
-        placeholder="Enter user/email"
+        type="email"
+        placeholder="Enter email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <Input
-        type="text"
-        placeholder="Enter Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+
       <ButtonWrapper>
-        <Button type="submit" disabled={loading}>
-          Log In
+        <Button type="submit" small disabled={loading}>
+          Reset Password
         </Button>
-        <Link to="/signup">Need An Account?</Link>
-        <Link to="/reset" style={{ color: "red" }}>
-          Forget Password?
+        <Link to="/login">
+          <Button>Login</Button>
         </Link>
+
         <Link to="/">Return to Home</Link>
       </ButtonWrapper>
     </Form>
   );
 }
 
-export default Log;
+export default Reset;
