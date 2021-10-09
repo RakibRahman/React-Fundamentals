@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import Child from "./Child.js";
 const Callback = () => {
   const [refresh, setRefresh] = useState(false);
-  const [data, setData] = useState("Hooks for optimization");
+  const [data, setData] = useState("Hooks for Optimization");
 
   const returnData = useCallback(
     (text) => {
