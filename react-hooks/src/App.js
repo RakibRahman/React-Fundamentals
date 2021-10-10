@@ -2,7 +2,9 @@
 // import State from "./useState/State";
 // import Effect from "./useEffect/Effect";
 // import Memo from "./useMemo/Memo";
-import Callback from "./useCallback/Callback.js";
+// import Callback from "./useCallback/Callback.js";
+// import Imperative from "./useImperativeHandle/Imperative.js";
+import Context from "./useContext/Context.js";
 function App() {
   return (
     <div>
@@ -10,7 +12,9 @@ function App() {
       {/* <Memo /> */}
       {/* <State /> */}
       {/* <Effect /> */}
-      <Callback />
+      {/* <Callback /> */}
+      {/* <Imperative /> */}
+      <Context />
     </div>
   );
 }
