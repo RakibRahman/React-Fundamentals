@@ -34,7 +34,7 @@ export const Counter = () => {
   return (
     <div>
       <h1>{state.count}</h1>
-      <h1>{state.count > 10 ? " Game Beche Thakle" : "labib"}</h1>
+      <h1>{state.count > 10 ? "" : "Ruhmama || Rakin"}</h1>
       <button onClick={() => dispatch({ type: "Increment" })}>Plus</button>
       <button onClick={() => dispatch({ type: "Decrement" })}>Minus</button>
     </div>
