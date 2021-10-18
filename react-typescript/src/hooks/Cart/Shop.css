@@ -1,0 +1,16 @@
+.products__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  font-size: 0.91rem;
+}
+.product__card {
+  text-align: center;
+  width: 400px;
+  padding: 0.2rem 0.3rem;
+  border: 1px solid #f14;
+}
+.product__card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
