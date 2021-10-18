@@ -1,4 +1,4 @@
-import { useContext, FC } from "react";
+import { useContext, FC, useState, useEffect } from "react";
 import CartContext from "./context";
 
 import { CartItem, ICartPageProps } from "./CartItem";

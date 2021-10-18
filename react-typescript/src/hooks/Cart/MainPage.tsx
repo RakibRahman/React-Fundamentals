@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { IItem } from "./interfaces/item";
 import { ShopPage } from "./ShopPage";
@@ -7,7 +7,6 @@ import { Cart } from "./Cart";
 import { CartContextProvider } from "./context";
 export const MainPage = () => {
   const [items, setItems] = useState<{ [key: string]: IItem[] }>({});
-  const [count, setCount] = useState<number>(0);
   const updateItems = (_items: { [key: string]: IItem[] }) => {
     setItems(_items);
   };
