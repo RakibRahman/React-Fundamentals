@@ -1,4 +1,4 @@
-import { useContext, FC, useState, useEffect } from "react";
+import { useContext, FC } from "react";
 import CartContext from "./context";
 
 import { CartItem, ICartPageProps } from "./CartItem";
@@ -10,10 +10,10 @@ export const Cart: FC<ICartPageProps> = (props) => {
       <h1>Cart</h1>
 
       <div className="cart__container">
-        {Object.keys(cartContext.items).length > 0 ? (
+        {Object.keys(cartContext.cartState.items).length > 0 ? (
           <div>
-            {Object.keys(cartContext.items).map((value, index) => {
-              let _items = cartContext.items[value];
+            {Object.keys(cartContext.cartState.items).map((value, index) => {
+              let _items = cartContext.cartState.items[value];
 
               if (_items.length > 0) {
                 return (

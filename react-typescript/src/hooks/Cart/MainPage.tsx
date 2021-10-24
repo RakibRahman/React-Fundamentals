@@ -1,18 +1,14 @@
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { IItem } from "./interfaces/item";
 import { ShopPage } from "./ShopPage";
 import { Shop } from "./Shop";
 import { Cart } from "./Cart";
-import { CartContextProvider } from "./context";
+import { CartContextProvider, cartReducer, initialCartState } from "./context";
 export const MainPage = () => {
-  const [items, setItems] = useState<{ [key: string]: IItem[] }>({});
-  const updateItems = (_items: { [key: string]: IItem[] }) => {
-    setItems(_items);
-  };
+  const [cartState, cartDispatch] = useReducer(cartReducer, initialCartState);
   const cartContextValues = {
-    items,
-    updateItems,
+    cartState,
+    cartDispatch,
   };
 
   return (

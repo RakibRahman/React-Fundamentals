@@ -7,7 +7,7 @@ export const ShopPage: FC = (props) => {
   const cartContext = useContext(CartContext);
   useEffect(() => {
     let _count = 0;
-    const _items = { ...cartContext.items };
+    const _items = { ...cartContext.cartState.items };
     for (let key in _items) {
       _count += _items[key].length;
     }

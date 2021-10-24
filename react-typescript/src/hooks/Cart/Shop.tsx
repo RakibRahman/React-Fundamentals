@@ -1,8 +1,12 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState, FC } from "react";
 import CartContext from "./context";
 import { IItem } from "./interfaces/item";
 import "./Shop.css";
-export const Shop = () => {
+export interface IShopItemProps {
+  item: IItem;
+}
+export const Shop: FC<IShopItemProps> = (props) => {
+  const { item } = props;
   const [products, setProducts] = useState<IItem[]>([]);
   const cartContext = useContext(CartContext);
   useEffect(() => {
@@ -23,15 +27,9 @@ export const Shop = () => {
             <p>{product.description}</p>
             <p>${product.price}</p>
             <button
-              onClick={() => {
-                let _items = { ...cartContext.items };
-                if (_items[product.title]) {
-                  _items[product.title].push(product);
-                } else {
-                  _items[product.title] = [product];
-                }
-                cartContext.updateItems(_items);
-              }}
+              onClick={() =>
+                cartContext.cartDispatch({ type: "add_item", payload: item })
+              }
             >
               Add To Cart
             </button>

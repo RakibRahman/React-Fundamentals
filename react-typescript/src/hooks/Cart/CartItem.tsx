@@ -6,6 +6,7 @@ export interface ICartPageProps {
   item: IItem;
   quantity: number;
 }
+
 export const CartItem: React.FC<ICartPageProps> = (props) => {
   const cartContext = useContext(CartContext);
 
@@ -22,16 +23,9 @@ export const CartItem: React.FC<ICartPageProps> = (props) => {
         <p>${item.price * quantity}</p>
 
         <button
-          onClick={() => {
-            let _items = { ...cartContext.items };
-
-            _items[item.title].pop();
-
-            if (_items[item.title].length === 0) {
-              delete _items[item.title];
-            }
-            cartContext.updateItems(_items);
-          }}
+          onClick={() =>
+            cartContext.cartDispatch({ type: "remove_item", payload: item })
+          }
         >
           remove item
         </button>
