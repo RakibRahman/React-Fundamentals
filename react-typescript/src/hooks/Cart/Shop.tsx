@@ -9,7 +9,7 @@ export const Shop = () => {
     fetch("https://fakestoreapi.com/products?sort=desc")
       .then((res) => res.json())
       .then((json) => setProducts(json));
-  });
+  }, []);
   return (
     <>
       <h1>Shop</h1>

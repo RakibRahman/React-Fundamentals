@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { IItem } from "./interfaces/item";
 import CartContext from "./context";
 
@@ -10,9 +10,7 @@ export const CartItem: React.FC<ICartPageProps> = (props) => {
   const cartContext = useContext(CartContext);
 
   const { item, quantity } = props;
-  const [total, setTotal] = useState<number | null>(null);
 
-  useEffect(() => {}, [cartContext]);
   return (
     <>
       <div className="cart">
