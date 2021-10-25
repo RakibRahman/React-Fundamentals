@@ -4,9 +4,11 @@ import "./App.css";
 // import { Message } from "./Hello";
 // import { MyDiv } from "./hooks/State";
 // import { PracticeReducer } from "./hooks/Reduce/PracticeReducer";
-import { MainPage } from "./hooks/Cart/MainPage";
+// import { MainPage } from "./hooks/Cart/MainPage";
+import {EffectApi} from "./hooks/EffectApi";
 function App() {
-  return <MainPage />;
+  return <EffectApi/>;
+
 }
 
 export default App;
