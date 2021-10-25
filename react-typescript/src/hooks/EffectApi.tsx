@@ -7,36 +7,53 @@ import React, {
 } from "react";
 
 interface UserInfoProps {
-  title: string;
-  first: string;
-  last: string;
+  name: {
+    title: string;
+    first: string;
+    last: string;
+  };
+  picture: {
+    large: string;
+    medium: string;
+    thumbnail: string;
+  };
   gender: string;
   age: number;
   phone: number;
 }
-interface UserInfo {
-  user: UserInfoProps[];
-  setUser: Dispatch<SetStateAction<string>>;
-}
+type UserInfo = UserInfoProps[];
 
-const url = `https://randomuser.me/api/`;
-export const EffectApi: FC<UserInfo> = ({ user, setUser }: UserInfo) => {
+const url = `https://randomuser.me/api/?results=10`;
+export const EffectApi: FC = () => {
+  const [user, setUser] = useState<UserInfo>([]);
   useEffect(() => {
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
         setUser(data.results);
       });
-    console.log(user);
   }, []);
   return (
     <div>
       <h1>hello</h1>
-      {user.map((user) => (
-        <div key={new Date().getMilliseconds()}>
-          <p>{user.gender}</p>
-        </div>
-      ))}
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {user.map((user, index) => (
+          <div
+            style={{
+              border: "1px solid red",
+              width: "300px",
+              textAlign: "center",
+            }}
+            key={index}
+          >
+            <img src={user.picture.large} alt="profile " />
+            <p>
+              {user.name.title} {user.name.first} {user.name.first}
+            </p>
+            <p>{user.gender}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
