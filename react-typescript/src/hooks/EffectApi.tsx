@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  FC,
-  useState,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import React, { useEffect, FC, useState, useReducer } from "react";
 
 interface UserInfoProps {
   name: {
@@ -22,38 +16,50 @@ interface UserInfoProps {
   phone: number;
 }
 type UserInfo = UserInfoProps[];
+interface StateProps {
+  user: Array<UserInfo>;
+  loading: boolean;
+}
 
 const url = `https://randomuser.me/api/?results=10`;
 export const EffectApi: FC = () => {
   const [user, setUser] = useState<UserInfo>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
+    setLoading(true);
+
     fetch(url)
-      .then((response) => response.json())
+      .then((response) => {
+        return response.json();
+      })
       .then((data) => {
         setUser(data.results);
+        setLoading(false);
       });
   }, []);
   return (
     <div>
-      <h1>hello</h1>
-      <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {user.map((user, index) => (
-          <div
-            style={{
-              border: "1px solid red",
-              width: "300px",
-              textAlign: "center",
-            }}
-            key={index}
-          >
-            <img src={user.picture.large} alt="profile " />
-            <p>
-              {user.name.title} {user.name.first} {user.name.first}
-            </p>
-            <p>{user.gender}</p>
-          </div>
-        ))}
-      </div>
+      {loading && <h1>Loading...</h1>}
+      {!loading && (
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
+          {user.map((user, index) => (
+            <div
+              style={{
+                border: "1px solid red",
+                width: "300px",
+                textAlign: "center",
+              }}
+              key={index}
+            >
+              <img src={user.picture.large} alt="profile " />
+              <p>
+                {user.name.title} {user.name.first} {user.name.last}
+              </p>
+              <p>{user.gender}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
