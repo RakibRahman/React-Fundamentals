@@ -1,4 +1,4 @@
-import React, { useEffect, FC, useState, useReducer } from "react";
+import React, { useEffect, FC, useState } from "react";
 
 interface UserInfoProps {
   name: {
@@ -12,19 +12,18 @@ interface UserInfoProps {
     thumbnail: string;
   };
   gender: string;
-  age: number;
+  dob: {
+    age: number;
+  };
   phone: number;
 }
 type UserInfo = UserInfoProps[];
-interface StateProps {
-  user: Array<UserInfo>;
-  loading: boolean;
-}
 
 const url = `https://randomuser.me/api/?results=10`;
 export const EffectApi: FC = () => {
   const [user, setUser] = useState<UserInfo>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
   useEffect(() => {
     setLoading(true);
 
@@ -35,6 +34,9 @@ export const EffectApi: FC = () => {
       .then((data) => {
         setUser(data.results);
         setLoading(false);
+      })
+      .catch(() => {
+        setError("failed to load");
       });
   }, []);
   return (
@@ -56,6 +58,8 @@ export const EffectApi: FC = () => {
                 {user.name.title} {user.name.first} {user.name.last}
               </p>
               <p>{user.gender}</p>
+              <p>{user.dob.age}</p>
+              <p>{user.phone}</p>
             </div>
           ))}
         </div>
