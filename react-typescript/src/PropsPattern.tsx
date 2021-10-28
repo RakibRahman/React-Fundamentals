@@ -6,6 +6,9 @@ interface SportsInfoProps {
   disabled?: boolean;
   goat: string[];
 }
+interface ListProps {
+  [key: string]: string;
+}
 
 const SportsInfo = (props: SportsInfoProps) => {
   const { sportName, maxPlayers, disabled, goat } = props;
@@ -23,7 +26,19 @@ const SportsInfo = (props: SportsInfoProps) => {
     </div>
   );
 };
-
+const List = (props: ListProps) => {
+  return (
+    <div>
+      <ul>
+        {Object.entries(props).map(([key, value]) => (
+          <li key={key}>
+            <strong>{key}</strong> {value}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 export const PropsPattern = () => {
   return (
     <div>
@@ -33,6 +48,7 @@ export const PropsPattern = () => {
         goat={["Ricky", "Shoaib"]}
         maxPlayers={11}
       />
+      <List name="rakib" gender="male" />
     </div>
   );
 };
