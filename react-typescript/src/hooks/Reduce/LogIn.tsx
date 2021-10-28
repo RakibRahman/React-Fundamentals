@@ -5,7 +5,7 @@ interface StateProps {
   password: string | number;
   loading: boolean;
   isLoggedIn: boolean;
-}
+} 
 type Action =
   | {
       type: "handleInputText";
