@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { PropsPattern } from "./PropsPattern";
+// import { PropsPattern } from "./PropsPattern";
 // import { Hello } from "./Hello";
 // import { Message } from "./Hello";
 // import { MyDiv } from "./hooks/State";
@@ -8,8 +8,9 @@ import { PropsPattern } from "./PropsPattern";
 // import { EffectReducer } from "./hooks/Reduce/EffectReducer";
 // import { MainPage } from "./hooks/Cart/MainPage";
 // import { EffectApi } from "./hooks/EffectApi";
+import { EventHandler } from "./EventHandler";
 function App() {
-  return <PropsPattern />;
+  return <EventHandler />;
 }
 
 export default App;
