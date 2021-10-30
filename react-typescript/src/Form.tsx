@@ -6,19 +6,23 @@ interface FormFields {
 interface InitialState {
   email: string;
   message: string;
+  color: string;
 }
-type FormState = InitialState[];
+// type FormState = InitialState[];
 export const Form = () => {
   const initState = {
     email: "",
     message: "",
+    color: "",
   };
   const [formState, setFormState] = useState<InitialState>(initState);
 
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandler = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const value = e.target.value;
 
-    setFormState({ ...formState, [e.currentTarget.name]: value });
+    setFormState({ ...formState, [e.target.name]: value });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -51,11 +55,23 @@ export const Form = () => {
             onChange={onChangeHandler}
           />
         </label>
+        <select name="color" id="rating" onChange={onChangeHandler}>
+          <option selected disabled>
+            Choose one
+          </option>
+          <option value="blue">Blue</option>
+          <option value="red">Red</option>
+          <option value="green">Green</option>
+          <option value="yellow">Yellow</option>
+        </select>
         <button type="submit">Submit</button>
       </form>
       <div>
         <p>{formState.email}</p>
         <p>{formState.message}</p>
+        <p style={{ color: `${formState.color}`, fontSize: "2rem" }}>
+          {formState.color}
+        </p>
       </div>
     </div>
   );

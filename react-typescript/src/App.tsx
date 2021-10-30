@@ -8,9 +8,10 @@ import "./App.css";
 // import { EffectReducer } from "./hooks/Reduce/EffectReducer";
 // import { MainPage } from "./hooks/Cart/MainPage";
 // import { EffectApi } from "./hooks/EffectApi";
-import { EventHandler } from "./EventHandler";
+// import { EventHandler } from "./EventHandler";
+import { Form } from "./Form";
 function App() {
-  return <EventHandler />;
+  return <Form />;
 }
 
 export default App;

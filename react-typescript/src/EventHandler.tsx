@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form } from "./Form";
+
 export const EventHandler = () => {
   const [quote, setQuote] = useState<string>("This World Shall Know Pain");
   const clickHandler = (
@@ -22,7 +22,6 @@ export const EventHandler = () => {
       <button onClick={clickHandler}>...</button>
       <button onClick={clickHandler2}>...</button>
       <hr />
-      <Form />
     </div>
   );
 };
