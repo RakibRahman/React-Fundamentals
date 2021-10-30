@@ -36,7 +36,7 @@ export const Form = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const target = e.target as typeof e.target & FormFields;
-    let mail = target.email;
+    let mail = target.email.value;
     console.log(mail);
     alert(JSON.stringify(formState));
   };
@@ -44,30 +44,30 @@ export const Form = () => {
   return (
     <div className="form-group">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">
-          Email:
-          <input
-            type="text"
-            name="email"
-            placeholder="enter email address"
-            value={formState.email}
-            onChange={onChangeHandler}
-          />
-        </label>
-        <label htmlFor="message">
-          Message:
-          <input
-            type="message"
-            name="message"
-            placeholder="enter your message"
-            value={formState.message}
-            onChange={onChangeHandler}
-          />
-        </label>
+        <fieldset>
+          <label htmlFor="email">
+            Email:
+            <input
+              type="text"
+              name="email"
+              placeholder="enter email address"
+              value={formState.email}
+              onChange={onChangeHandler}
+            />
+          </label>
+          <label htmlFor="message">
+            Message:
+            <input
+              type="message"
+              name="message"
+              placeholder="enter your message"
+              value={formState.message}
+              onChange={onChangeHandler}
+            />
+          </label>
+        </fieldset>
         <select name="color" id="rating" onChange={onChangeHandler}>
-          <option selected disabled>
-            Choose one
-          </option>
+          <option>Choose one</option>
           <option value="blue">Blue</option>
           <option value="red">Red</option>
           <option value="green">Green</option>
