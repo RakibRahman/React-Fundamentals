@@ -3,6 +3,7 @@ interface FormFields {
   email: HTMLInputElement;
   message: HTMLInputElement;
 }
+
 interface InitialState {
   email: string;
   message: string;
@@ -11,6 +12,8 @@ interface InitialState {
   pro: boolean;
   ultra: boolean;
   shirtSize: string;
+  subscribe: string;
+  points: number;
 }
 // type FormState = InitialState[];
 export const Form = () => {
@@ -22,6 +25,8 @@ export const Form = () => {
     pro: false,
     ultra: false,
     shirtSize: "",
+    subscribe: "",
+    points: 0,
   };
   const [formState, setFormState] = useState<InitialState>(initState);
 
@@ -73,7 +78,7 @@ export const Form = () => {
           <option value="green">Green</option>
           <option value="yellow">Yellow</option>
         </select>
-
+        {/* //! checkbox */}
         <fieldset>
           <legend>Select your Plan</legend>
           <label htmlFor="basic">Basic Plan</label>
@@ -147,6 +152,45 @@ export const Form = () => {
             checked={formState.shirtSize === "l"}
           />
           <label htmlFor="small">large</label>
+        </fieldset>
+        <fieldset>
+          <label> subscribe to newsletters?</label>
+          <br />
+          <label htmlFor="subscribe-yes">
+            Yes
+            <input
+              type="radio"
+              id="subscribe-yes"
+              name="subscribe"
+              value="yes"
+              onChange={onChangeHandler}
+              checked={formState.subscribe === "yes"}
+            />
+          </label>
+          <br />
+          <label htmlFor="subscribe-no">
+            No
+            <input
+              type="radio"
+              id="subscribe-no"
+              name="subscribe"
+              value="no"
+              onChange={onChangeHandler}
+              checked={formState.subscribe === "no"}
+            />
+          </label>
+        </fieldset>
+        <fieldset>
+          <label htmlFor="points">Points (between 0 and 10):</label>
+          <input
+            type="range"
+            id="points"
+            name="points"
+            min="0"
+            max="10"
+            value={formState.points}
+            onChange={onChangeHandler}
+          />
         </fieldset>
         <button type="submit">Submit</button>
       </form>
