@@ -1,31 +1,14 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import localforage from "localforage";
 
 import type { Person } from "../types/person";
 
 import { LabeledInput, Loading } from "../components";
 import { initialPerson } from "../utils";
-
-function savePerson(person: Person | null): void {
-  console.log("Saving", person);
-
-  localforage.setItem("person", person);
-}
+import { usePerson } from "./usePerson";
 
 export function PersonEditor(): ReactElement {
-  const [person, setPerson] = useState<Person | null>(null);
-
-  useEffect(() => {
-    const getPerson = async () => {
-      const person = await localforage.getItem<Person>("person");
-      setPerson(person ?? initialPerson);
-    };
-    getPerson();
-  }, []);
-
-  useEffect(() => {
-    savePerson(person);
-  }, [person]);
+  const [person, setPerson] = usePerson(initialPerson);
 
   if (!person) {
     return <Loading />;
@@ -44,7 +27,27 @@ export function PersonEditor(): ReactElement {
         label="Firstname:"
         value={person.firstname}
         onChange={(e) => {
-          setPerson({ ...person, firstname: e.target.value });
+          setPerson((person) => ({
+            ...person!,
+            firstname: e.target.value,
+          }));
+
+          if (e.target.value === "Minato") {
+            setPerson((person) => ({
+              ...person!,
+              surname: "The Yellow Flash",
+              address: "Konoha",
+              email: "instantKiller@flash.com",
+            }));
+          }
+          if (e.target.value === "Pain") {
+            setPerson((person) => ({
+              ...person!,
+              surname: "Six Path of pain",
+              address: "Amagaakure",
+              email: "shinra@tensei.com",
+            }));
+          }
         }}
       />
       <LabeledInput
@@ -77,7 +80,7 @@ export function PersonEditor(): ReactElement {
       />
       <button className="btn btn-primary">Save</button>
       <hr />
-      <pre>{JSON.stringify(person, null, 2)}</pre>
+      <pre>{JSON.stringify(person, null, "---")}</pre>
     </form>
   );
 }
