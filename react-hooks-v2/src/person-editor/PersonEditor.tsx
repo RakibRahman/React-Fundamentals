@@ -1,11 +1,15 @@
-import { ReactElement, useEffect, useState } from "react";
-import localforage from "localforage";
-
-import type { Person } from "../types/person";
-
+import { ReactElement } from "react";
 import { LabeledInput, Loading } from "../components";
 import { initialPerson } from "../utils";
 import { usePerson } from "./usePerson";
+
+interface LoadInfo {
+  value: string;
+  value2: string;
+  surname: string;
+  email: string;
+  address: string;
+}
 
 export function PersonEditor(): ReactElement {
   const [person, setPerson] = usePerson(initialPerson);
@@ -13,6 +17,16 @@ export function PersonEditor(): ReactElement {
   if (!person) {
     return <Loading />;
   }
+  const preInfo = (info: LoadInfo) => {
+    if (info.value === info.value2) {
+      setPerson((person) => ({
+        ...person!,
+        surname: info.surname,
+        address: info.address,
+        email: info.email,
+      }));
+    }
+  };
 
   return (
     <form
@@ -32,22 +46,22 @@ export function PersonEditor(): ReactElement {
             firstname: e.target.value,
           }));
 
-          if (e.target.value === "Minato") {
-            setPerson((person) => ({
-              ...person!,
-              surname: "The Yellow Flash",
-              address: "Konoha",
-              email: "instantKiller@flash.com",
-            }));
-          }
-          if (e.target.value === "Pain") {
-            setPerson((person) => ({
-              ...person!,
-              surname: "Six Path of pain",
-              address: "Amagaakure",
-              email: "shinra@tensei.com",
-            }));
-          }
+          const minato = {
+            value: e.target.value,
+            value2: "Minato",
+            surname: "Yellow",
+            email: "yellow@gmail.com",
+            address: "Konoha",
+          };
+          preInfo(minato);
+          const pain = {
+            value: e.target.value,
+            value2: "Pain",
+            surname: "Six Path of Pain",
+            email: "sixpath@gmail.com",
+            address: "Rain village",
+          };
+          preInfo(pain);
         }}
       />
       <LabeledInput
