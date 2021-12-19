@@ -1,8 +1,7 @@
 import { ReactElement } from "react";
 import { LabeledInput, Loading } from "../components";
 import { initialPerson } from "../utils";
-import { usePerson } from "./usePerson";
-
+import { usePerson } from "../hooks/usePerson";
 interface LoadInfo {
   value: string;
   value2: string;

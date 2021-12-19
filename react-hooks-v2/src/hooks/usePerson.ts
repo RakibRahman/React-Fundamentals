@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import localforage from "localforage";
 import type { Person } from "../types/person";
-
+import { sleep } from "../utils/sleep";
+import { useIsMounted } from "./useIsMounted";
 export const usePerson = (initialPerson: Person) => {
   const [person, setPerson] = useState(initialPerson);
-
+  const isMounted = useIsMounted();
   const savePerson = (person: Person | null): void => {
     localforage.setItem("person", person);
     console.log("Saving Current Person");
@@ -13,10 +14,13 @@ export const usePerson = (initialPerson: Person) => {
   useEffect(() => {
     const getPerson = async () => {
       const person = await localforage.getItem<Person>("person");
-      setPerson(person ?? initialPerson);
+      await sleep(2500);
+      if (isMounted.current) {
+        setPerson(person ?? initialPerson);
+      }
     };
     getPerson();
-  }, [initialPerson]);
+  }, [initialPerson, isMounted]);
 
   //? update savePerson on 'person' update
   useEffect(() => {
