@@ -3,7 +3,7 @@ interface Props {
   fn: () => void;
   timeout: number;
 }
-export const useDebounce = ({ fn, timeout }: Props): void => {
+export const useDebounce = (fn: () => void, timeout: number): void => {
   useEffect(() => {
     const handleDebounce = setTimeout(fn, timeout);
     return () => clearTimeout(handleDebounce);

@@ -3,12 +3,13 @@ import localforage from "localforage";
 import type { Person } from "../types/person";
 import { sleep } from "../utils/sleep";
 import { useIsMounted } from "./useIsMounted";
+import { useDebounce } from "./useDebounce";
 export const usePerson = (initialPerson: Person) => {
   const [person, setPerson] = useState(initialPerson);
   const isMounted = useIsMounted();
   const savePerson = (person: Person | null): void => {
     localforage.setItem("person", person);
-    console.log("Saving Current Person");
+    console.log("Saving Current Person", person);
   };
   //? get person info from storage
   useEffect(() => {
@@ -23,9 +24,9 @@ export const usePerson = (initialPerson: Person) => {
   }, [initialPerson, isMounted]);
 
   //? update savePerson on 'person' update
-  useEffect(() => {
+  useDebounce(() => {
     savePerson(person);
-  }, [person]);
+  }, 1500);
 
   return [person, setPerson] as const;
 };
