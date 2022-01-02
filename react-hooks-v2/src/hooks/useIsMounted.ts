@@ -12,3 +12,5 @@ export const useIsMounted = (): Readonly<MutableRefObject<boolean>> => {
 
   return isMounted;
 };
+
+// useRef() to maintain state

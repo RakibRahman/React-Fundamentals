@@ -4,6 +4,9 @@ import type { Person } from "../types/person";
 import { sleep } from "../utils/sleep";
 import { useIsMounted } from "./useIsMounted";
 import { useDebounce } from "./useDebounce";
+import { useWillUnmount } from "./useWillUnmount";
+import { useThrottle } from "./useThrottle";
+
 export const usePerson = (initialPerson: Person) => {
   const [person, setPerson] = useState(initialPerson);
   const [, setNow] = useState(new Date());
@@ -25,7 +28,7 @@ export const usePerson = (initialPerson: Person) => {
   }, [initialPerson, isMounted]);
 
   useEffect(() => {
-    const handle = setInterval(() => setNow(new Date()), 1500);
+    const handle = setInterval(() => setNow(new Date()), 500);
     return () => clearInterval(handle);
   }, []);
   const saveFn = useCallback(() => {
@@ -33,7 +36,10 @@ export const usePerson = (initialPerson: Person) => {
   }, [person]);
 
   //? update savePerson on 'person' update
-  useDebounce(saveFn, 10000);
+  // useDebounce(saveFn, 1000);
+  useThrottle(saveFn, 1000);
+
+  useWillUnmount(saveFn);
 
   return [person, setPerson] as const;
 };
