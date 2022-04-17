@@ -11,10 +11,12 @@ export const usePerson = (initialPerson: Person) => {
   const [person, setPerson] = useState(initialPerson);
   const [, setNow] = useState(new Date());
   const isMounted = useIsMounted();
+
   const savePerson = (person: Person | null): void => {
     localforage.setItem("person", person);
     console.log("Saving Current Person", person);
   };
+  
   //? get person info from storage
   useEffect(() => {
     const getPerson = async () => {
