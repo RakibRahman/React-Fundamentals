@@ -7,6 +7,8 @@ import "./App.css";
 import { PersonEditor } from "./person-editor";
 import { KimrofPersonEditor } from "./kimrof-person-editor";
 import { Counter } from "./rules-of-hooks";
+import Category from "./components/Category";
+import CategoryComponent from "./components/Category";
 
 export function App(): ReactElement {
   return (
@@ -26,6 +28,9 @@ export function App(): ReactElement {
             <Nav.Link as={NavLink} to="/kimrof-person-editor">
               Kimrof
             </Nav.Link>
+            <Nav.Link as={NavLink} to="/category">
+              Category
+            </Nav.Link>
             <Nav.Link href="https://formik.org/docs/api/formik" target="formik">
               Formik
             </Nav.Link>
@@ -34,6 +39,7 @@ export function App(): ReactElement {
         <Routes>
           <Route path="/person-editor" element={<PersonEditor />}></Route>
           <Route path="/counter" element={<Counter />}></Route>
+          <Route path="/category" element={<CategoryComponent />}></Route>
           <Route
             path="/kimrof-person-editor"
             element={<KimrofPersonEditor />}
