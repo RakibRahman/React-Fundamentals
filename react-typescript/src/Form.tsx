@@ -14,6 +14,7 @@ interface InitialState {
   shirtSize: string;
   subscribe: string;
   points: number;
+
 }
 // type FormState = InitialState[];
 export const Form = () => {
@@ -27,8 +28,10 @@ export const Form = () => {
     shirtSize: "",
     subscribe: "",
     points: 0,
+
   };
   const [formState, setFormState] = useState<InitialState>(initState);
+  const [type, setType] = useState<string>('count');
 
   const onChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -36,7 +39,15 @@ export const Form = () => {
     const value = e.target.value;
 
     setFormState({ ...formState, [e.target.name]: value });
+    // console.log(formsta)
   };
+
+  const onTypeChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    console.log(value);
+    setType(value);
+
+  }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -45,7 +56,15 @@ export const Form = () => {
     console.log(mail);
     alert(JSON.stringify(formState));
   };
-
+  React.useEffect(() => {
+    console.log(type)
+    if (type === 'percentage') {
+      console.log('percentage type')
+    }
+    if (type === 'count') {
+      console.log('count Type')
+    }
+  }, [type])
   return (
     <div className="form-group">
       <form onSubmit={handleSubmit}>
@@ -152,6 +171,27 @@ export const Form = () => {
             checked={formState.shirtSize === "l"}
           />
           <label htmlFor="small">large</label>
+        </fieldset>
+        <fieldset>
+          <legend>Get Value Type</legend>
+          <label htmlFor="countType">Count</label>
+          <input
+            type="radio"
+            checked={type === "count"}
+            onChange={onTypeChangeHandler}
+            id="countType"
+            name="countType"
+            value='count'
+          />
+          <label htmlFor="percentageType">Percentage</label>
+          <input
+            type="radio"
+            checked={type === 'percentage'}
+            onChange={onTypeChangeHandler}
+            id="percentageType"
+            name="percentageType"
+            value='percentage'
+          />
         </fieldset>
         <fieldset>
           <label> subscribe to newsletters?</label>
